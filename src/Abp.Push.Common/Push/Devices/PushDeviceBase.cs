@@ -1,9 +1,11 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Abp.Domain.Entities.Auditing;
 
 namespace Abp.Push.Devices
 {
+    [Table("AbpPushDevices")]
     public abstract class PushDeviceBase : FullAuditedEntity<long>, IHasDeviceInfo<Guid>
     {
         /// <summary>
@@ -19,13 +21,13 @@ namespace Abp.Push.Devices
         public const int MaxDeviceIdentifierLength = 1024;
 
         /// <summary>
-        /// Maximum length of <see cref="Provider"/> property.
+        /// Maximum length of <see cref="ServiceProvider"/> property.
         /// Value: 1024 (1 kB).
         /// </summary>
         public const int MaxProviderLength = 512;
 
         /// <summary>
-        /// Maximum length of <see cref="ProviderKey"/> property.
+        /// Maximum length of <see cref="ServiceProviderKey"/> property.
         /// Value: 1024 (1 kB).
         /// </summary>
         public const int MaxProviderKeyLength = 1024;
@@ -65,17 +67,17 @@ namespace Abp.Push.Devices
         public virtual Guid DeviceIdentifier { get; set; }
 
         /// <summary>
-        /// Provider type.
+        /// Service Provider type.
         /// </summary>
         [MaxLength(MaxProviderLength)]
-        public virtual string Provider { get; set; }
+        public virtual string ServiceProvider { get; set; }
 
         /// <summary>
-        /// Provider key.
+        /// Service Provider key.
         /// Follows convention in <see cref="https://msdn.microsoft.com/en-us/library/microsoft.aspnet.identity.userclientinfo.providerkey(v=vs.108).aspx"/>
         /// </summary>
         [MaxLength(MaxProviderKeyLength)]
-        public virtual string ProviderKey { get; set; }
+        public virtual string ServiceProviderKey { get; set; }
 
         /// <summary>
         /// data payload as JSON string. (optional)
@@ -96,7 +98,7 @@ namespace Abp.Push.Devices
 
         public override string ToString()
         {
-            return $"platform: { DevicePlatform } , identifier: { DeviceIdentifier } , provider: { Provider } , providerKey: { ProviderKey }";
+            return $"platform: { DevicePlatform } , identifier: { DeviceIdentifier } , serviceProvider: { ServiceProvider } , serviceProviderKey: { ServiceProviderKey }";
         }
     }
 }
