@@ -1,18 +1,14 @@
 ﻿using System;
+using Abp.Domain.Entities.Auditing;
 
 namespace Abp.Push.Devices
 {
-    public abstract class PushDeviceBase : IHasDeviceInfo<long>
+    public abstract class PushDeviceBase : FullAuditedEntity<long>, IHasDeviceInfo<Guid>
     {
         /// <summary>
         /// Device Platform.
         /// </summary>
         public virtual string DevicePlatform { get; set; }
-
-        /// <summary>
-        /// Device id.
-        /// </summary>
-        public virtual long DeviceId { get; set; }
 
         /// <summary>
         /// Device name.
@@ -23,6 +19,11 @@ namespace Abp.Push.Devices
         /// Normalized device name.
         /// </summary>
         public virtual string NormalizedDeviceName { get; private set; }
+
+        /// <summary>
+        /// Device identifier.
+        /// </summary>
+        public virtual Guid DeviceIdentifier { get; set; }
 
         /// <summary>
         /// Provider type.

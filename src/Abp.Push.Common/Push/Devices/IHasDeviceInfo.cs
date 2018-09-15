@@ -3,14 +3,9 @@
     /// <summary>
     /// Represents information of a device
     /// </summary>
-    public interface IHasDeviceInfo<TKey>
+    public interface IHasDeviceInfo<TIdentifier>
     {
         string DevicePlatform { get; }
-
-        /// <summary>
-        /// Device id
-        /// </summary>
-        TKey DeviceId { get; }
 
         /// <summary>
         /// Device name
@@ -21,5 +16,12 @@
         /// Normalized device name
         /// </summary>
         string NormalizedDeviceName { get; }
+
+        /// <summary>
+        /// Device identifier
+        /// </summary>
+        TIdentifier DeviceIdentifier { get; }
+
+
     }
 }
