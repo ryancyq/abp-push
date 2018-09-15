@@ -11,5 +11,10 @@
         /// User Id.
         /// </summary>
         public virtual long? UserId { get; set; }
+
+        public override string ToString()
+        {
+            return $"tenantId: { TenantId } , userId: { UserId }, " + base.ToString();
+        }
     }
 }
