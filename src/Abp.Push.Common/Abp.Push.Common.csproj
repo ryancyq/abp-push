@@ -28,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Localization\Push\*.xml" Exclude="bin\**;obj\**;**\*.xproj;packages\**;@(EmbeddedResource)" />
+    <EmbeddedResource Include="Push\Localization\*.xml" Exclude="bin\**;obj\**;**\*.xproj;packages\**;@(EmbeddedResource)" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,13 +38,4 @@
     </None>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Push\Configurations\" />
-    <Folder Include="Push\Providers\" />
-    <Folder Include="Push\Requests\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Remove="Push\Requests\PushRequestNames.cs" />
-    <Compile Remove="Push\Devices\PushClient.cs" />
-  </ItemGroup>
 </Project>
