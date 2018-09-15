@@ -1,6 +1,8 @@
-﻿namespace Abp.Push.Devices
+﻿using System;
+
+namespace Abp.Push.Devices
 {
-    public abstract class PushDeviceBase : IHasDeviceInfo<string>
+    public abstract class PushDeviceBase : IHasDeviceInfo<long>
     {
         /// <summary>
         /// Device Platform.
@@ -8,14 +10,9 @@
         public virtual string DevicePlatform { get; set; }
 
         /// <summary>
-        /// Device identifier.
+        /// Device id.
         /// </summary>
-        public virtual string DeviceIdentifier { get; set; }
-
-        /// <summary>
-        /// Normalized device identifier.
-        /// </summary>
-        public virtual string NormalizedDeviceIdentifier { get; private set; }
+        public virtual long DeviceId { get; set; }
 
         /// <summary>
         /// Device name.
@@ -48,5 +45,10 @@
         /// It's AssemblyQualifiedName of the type.
         /// </summary>
         public virtual string DataTypeName { get; set; }
+
+        public virtual void NormalizeDeviceName()
+        {
+            NormalizedDeviceName = DeviceName?.ToUpperInvariant();
+        }
     }
 }
