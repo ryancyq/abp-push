@@ -23,7 +23,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Abp.Push.Common\Abp.Push.Common.csproj" />
+    <PackageReference Include="Abp" Version="3.8.2" />
+    <PackageReference Include="Abp.AutoMapper" Version="3.8.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,9 +32,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="bin\Release\netstandard2.0\Abp.Push.pdb">
+    <None Include="bin\Release\netstandard2.0\Abp.Push.Common.pdb">
       <PackagePath>lib/netstandard2.0/</PackagePath>
       <Pack>true</Pack>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Push\Configurations\" />
+    <Folder Include="Push\Providers\" />
+    <Folder Include="Push\Requests\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Push\Requests\PushRequestNames.cs" />
+    <Compile Remove="Push\Devices\PushClient.cs" />
   </ItemGroup>
 </Project>
