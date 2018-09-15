@@ -12,5 +12,7 @@ namespace Abp.Push.Configurations
         ITypeList<PushDefinitionProvider> DefinitionProviders { get; }
 
         List<PushServiceProviderInfo> ServiceProviders { get; }
+
+        List<PushDevicePlatformInfo> DevicePlatforms { get; }
     }
 }

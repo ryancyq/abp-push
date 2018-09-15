@@ -11,10 +11,13 @@ namespace Abp.Push.Configurations
 
         public List<PushServiceProviderInfo> ServiceProviders { get; private set; }
 
+        public List<PushDevicePlatformInfo> DevicePlatforms { get; private set; }
+
         public PushConfiguration()
         {
             DefinitionProviders = new TypeList<PushDefinitionProvider>();
             ServiceProviders = new List<PushServiceProviderInfo>();
+            DevicePlatforms = new List<PushDevicePlatformInfo>();
         }
     }
 }
