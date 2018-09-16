@@ -1,4 +1,6 @@
-﻿namespace Abp.Push.Devices
+﻿using System;
+
+namespace Abp.Push.Devices
 {
     /// <summary>
     /// Interface to get a device identifier.
@@ -13,6 +15,6 @@
         /// <summary>
         /// Id of the device.
         /// </summary>
-        long DeviceId { get; }
+        Guid DeviceId { get; }
     }
 }
