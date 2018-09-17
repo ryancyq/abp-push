@@ -4,5 +4,8 @@
 
     <text name="AbpPushSettingNames.Receive" value="Receives push notifications" />
 
+    <text name="Push.ServiceProvider.Invalid" value="Invalid provider" />
+    <text name="Push.DevicePlatform.Invalid" value="Invalid platform" />
+
   </texts>
 </localizationDictionary>
