@@ -1,0 +1,54 @@
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Abp.Push.Devices;
+
+namespace Abp.Push
+{
+    /// <summary>
+    /// Used to store (persist) push devices.
+    /// </summary>
+    public interface IAbpPushDeviceStore<TDevice> where TDevice : AbpPushDevice
+    {
+        /// <summary>
+        /// Delete a push device by user identifier.
+        /// </summary>
+        Task DeleteDevicesByUserAsync(IUserIdentifier userIdentifier);
+
+        /// <summary>
+        /// Delete all push devices by user identifier and service provider.
+        /// <param name="userIdentifier">The user identifier.</param>
+        /// <param name="serviceProvider">The service provider.</param>
+        /// </summary>
+        Task DeleteDevicesByUserProviderAsync(IUserIdentifier userIdentifier, string serviceProvider);
+
+        /// <summary>
+        /// Delete all push devices by user identifier and device platform.
+        /// <param name="userIdentifier">The user identifier.</param>
+        /// <param name="devicePlatform">The device platform.</param>
+        /// </summary>
+        Task DeleteDevicesByUserPlatformAsync(IUserIdentifier userIdentifier, string devicePlatform);
+
+        /// <summary>
+        /// Get a push device by user identifier and service provider and service provider key.
+        /// </summary>
+        /// <param name="userIdentifier">The user identifier.</param>
+        /// <param name="serviceProvider">The service provider.</param>
+        /// <param name="serviceProviderKey">The service provider key.</param>
+        /// <returns>The push device, if it is found</returns>
+        Task<TDevice> GetUserDeviceOrNullAsync(IUserIdentifier userIdentifier, string serviceProvider, string serviceProviderKey);
+
+        /// <summary>
+        /// Gets all push devices by user identifier and service provider.
+        /// <param name="userIdentifier">The user identifier.</param>
+        /// <param name="serviceProvider">The service provider.</param>
+        /// </summary>
+        Task<IList<TDevice>> GetDevicesByUserProviderAsync(IUserIdentifier userIdentifier, string serviceProvider, int? skipCount = null, int? maxResultCount = null);
+
+        /// <summary>
+        /// Gets all push devices by user identifier and device platform.
+        /// <param name="userIdentifier">The user identifier.</param>
+        /// <param name="devicePlatform">The device platform.</param>
+        /// </summary>
+        Task<IList<TDevice>> GetDevicesByUserPlatformAsync(IUserIdentifier userIdentifier, string devicePlatform, int? skipCount = null, int? maxResultCount = null);
+    }
+}
