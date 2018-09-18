@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Abp.Push.Devices;
 
-namespace Abp.Push
+namespace Abp.Push.Devices
 {
     /// <summary>
     /// Null pattern implementation of <see cref="IPushDeviceStore{TDevice}"/>.
