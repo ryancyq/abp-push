@@ -29,6 +29,16 @@ namespace Abp.Push
             return Task.FromResult(0);
         }
 
+        public Task<TDevice> GetUserDeviceOrNullAsync(IUserIdentifier userIdentifier, string serviceProvider, string serviceProviderKey)
+        {
+            return Task.FromResult(null as TDevice);
+        }
+
+        public Task<List<TDevice>> GetDevicesByUserAsync(IUserIdentifier userIdentifier, int? skipCount = null, int? maxResultCount = null)
+        {
+            return Task.FromResult(new List<TDevice>());
+        }
+
         public Task<List<TDevice>> GetDevicesByUserPlatformAsync(IUserIdentifier userIdentifier, string devicePlatform, int? skipCount = null, int? maxResultCount = null)
         {
             return Task.FromResult(new List<TDevice>());
@@ -39,9 +49,20 @@ namespace Abp.Push
             return Task.FromResult(new List<TDevice>());
         }
 
-        public Task<TDevice> GetUserDeviceOrNullAsync(IUserIdentifier userIdentifier, string serviceProvider, string serviceProviderKey)
+        public Task<int> GetDeviceCountByUserAsync(IUserIdentifier userIdentifier)
         {
-            return Task.FromResult(new List<TDevice>());
+            return Task.FromResult(0);
         }
+
+        public Task<int> GetDeviceCountByUserPlatformAsync(IUserIdentifier userIdentifier, string devicePlatform)
+        {
+            return Task.FromResult(0);
+        }
+
+        public Task<int> GetDeviceCountByUserProviderAsync(IUserIdentifier userIdentifier, string serviceProvider)
+        {
+            return Task.FromResult(0);
+        }
+
     }
 }

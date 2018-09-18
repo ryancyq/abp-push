@@ -49,6 +49,11 @@ namespace Abp.Push
             return Task.FromResult(0);
         }
 
+        public Task DeleteDevicesByProviderAsync(string serviceProvider, string serviceProviderKey)
+        {
+            return Task.FromResult(0);
+        }
+
         public Task DeleteDevicesByPlatformAsync(string devicePlatform)
         {
             return Task.FromResult(0);

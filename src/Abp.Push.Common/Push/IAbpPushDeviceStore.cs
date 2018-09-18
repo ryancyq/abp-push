@@ -38,6 +38,12 @@ namespace Abp.Push
         Task<TDevice> GetUserDeviceOrNullAsync(IUserIdentifier userIdentifier, string serviceProvider, string serviceProviderKey);
 
         /// <summary>
+        /// Gets all push devices by user identifier.
+        /// <param name="userIdentifier">The user identifier.</param>
+        /// </summary>
+        Task<List<TDevice>> GetDevicesByUserAsync(IUserIdentifier userIdentifier, int? skipCount = null, int? maxResultCount = null);
+
+        /// <summary>
         /// Gets all push devices by user identifier and service provider.
         /// <param name="userIdentifier">The user identifier.</param>
         /// <param name="serviceProvider">The service provider.</param>
@@ -50,5 +56,25 @@ namespace Abp.Push
         /// <param name="devicePlatform">The device platform.</param>
         /// </summary>
         Task<List<TDevice>> GetDevicesByUserPlatformAsync(IUserIdentifier userIdentifier, string devicePlatform, int? skipCount = null, int? maxResultCount = null);
+
+        /// <summary>
+        /// Gets push devices count by user identifier.
+        /// <param name="userIdentifier">The user identifier.</param>
+        /// </summary>
+        Task<int> GetDeviceCountByUserAsync(IUserIdentifier userIdentifier);
+
+        /// <summary>
+        /// Gets push device count by user identifier and service provider.
+        /// <param name="userIdentifier">The user identifier.</param>
+        /// <param name="serviceProvider">The service provider.</param>
+        /// </summary>
+        Task<int> GetDeviceCountByUserProviderAsync(IUserIdentifier userIdentifier, string serviceProvider);
+
+        /// <summary>
+        /// Gets push device count by user identifier and device platform.
+        /// <param name="userIdentifier">The user identifier.</param>
+        /// <param name="devicePlatform">The device platform.</param>
+        /// </summary>
+        Task<int> GetDeviceCountByUserPlatformAsync(IUserIdentifier userIdentifier, string devicePlatform);
     }
 }

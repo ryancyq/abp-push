@@ -41,6 +41,13 @@ namespace Abp.Push
         Task DeleteDevicesByProviderAsync(string serviceProvider);
 
         /// <summary>
+        /// Delete all push devices by service provider and service provider key.
+        /// <param name="serviceProvider">The service provider.</param>
+        /// <param name="serviceProviderKey">The service provider key.</param>
+        /// </summary>
+        Task DeleteDevicesByProviderAsync(string serviceProvider, string serviceProviderKey);
+
+        /// <summary>
         /// Delete all push devices by device platform.
         /// <param name="devicePlatform">The device platform.</param>
         /// </summary>
