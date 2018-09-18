@@ -57,18 +57,18 @@ namespace Abp.Push
         /// <summary>
         /// Gets all push devices.
         /// </summary>
-        Task<IList<TDevice>> GetDevicesAsync(int? skipCount = null, int? maxResultCount = null);
+        Task<List<TDevice>> GetDevicesAsync(int? skipCount = null, int? maxResultCount = null);
 
         /// <summary>
         /// Gets all push devices by service provider.
         /// <param name="serviceProvider">The service provider.</param>
         /// </summary>
-        Task<IList<TDevice>> GetDevicesByProviderAsync(string serviceProvider, int? skipCount = null, int? maxResultCount = null);
+        Task<List<TDevice>> GetDevicesByProviderAsync(string serviceProvider, int? skipCount = null, int? maxResultCount = null);
 
         /// <summary>
         /// Gets all push devices by device platform.
         /// <param name="devicePlatform">The device platform.</param>
         /// </summary>
-        Task<IList<TDevice>> GetDevicesByPlatformAsync(string devicePlatform, int? skipCount = null, int? maxResultCount = null);
+        Task<List<TDevice>> GetDevicesByPlatformAsync(string devicePlatform, int? skipCount = null, int? maxResultCount = null);
     }
 }

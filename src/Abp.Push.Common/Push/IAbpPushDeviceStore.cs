@@ -7,7 +7,7 @@ namespace Abp.Push
     /// <summary>
     /// Used to store (persist) push devices.
     /// </summary>
-    public interface IAbpPushDeviceStore<TDevice> where TDevice : AbpPushDevice
+    public interface IAbpPushDeviceStore<TDevice> : IPushDeviceStore<TDevice> where TDevice : AbpPushDevice
     {
         /// <summary>
         /// Delete a push device by user identifier.
@@ -42,13 +42,13 @@ namespace Abp.Push
         /// <param name="userIdentifier">The user identifier.</param>
         /// <param name="serviceProvider">The service provider.</param>
         /// </summary>
-        Task<IList<TDevice>> GetDevicesByUserProviderAsync(IUserIdentifier userIdentifier, string serviceProvider, int? skipCount = null, int? maxResultCount = null);
+        Task<List<TDevice>> GetDevicesByUserProviderAsync(IUserIdentifier userIdentifier, string serviceProvider, int? skipCount = null, int? maxResultCount = null);
 
         /// <summary>
         /// Gets all push devices by user identifier and device platform.
         /// <param name="userIdentifier">The user identifier.</param>
         /// <param name="devicePlatform">The device platform.</param>
         /// </summary>
-        Task<IList<TDevice>> GetDevicesByUserPlatformAsync(IUserIdentifier userIdentifier, string devicePlatform, int? skipCount = null, int? maxResultCount = null);
+        Task<List<TDevice>> GetDevicesByUserPlatformAsync(IUserIdentifier userIdentifier, string devicePlatform, int? skipCount = null, int? maxResultCount = null);
     }
 }
