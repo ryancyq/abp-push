@@ -16,6 +16,6 @@ namespace Abp.Push.Providers
         /// This method tries to deliver a single push to specified users.
         /// If a user does not have any registered device, it should ignore him.
         /// </summary>
-        Task PushAsync(IUserIdentifier[] userIdentifiers, PushRequestInfo pushRequestInfo);
+        Task PushAsync(IUserIdentifier[] userIdentifiers, PushRequest pushRequestInfo);
     }
 }
