@@ -1,12 +1,13 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Abp.Domain.Entities;
 using Abp.Domain.Entities.Auditing;
 
 namespace Abp.Push.Devices
 {
     [Table("AbpPushDevices")]
-    public abstract class PushDeviceBase : FullAuditedEntity<Guid>, IHasDeviceInfo<Guid>
+    public class PushDevice : CreationAuditedEntity<Guid>, IHasDeviceInfo<Guid>, IMayHaveTenant
     {
         /// <summary>
         /// Maximum length of <see cref="DeviceName"/> property.
@@ -43,6 +44,16 @@ namespace Abp.Push.Devices
         /// Value: 512.
         /// </summary>
         public const int MaxDataTypeNameLength = 512;
+
+        /// <summary>
+        /// Tenant Id.
+        /// </summary>
+        public virtual int? TenantId { get; set; }
+
+        /// <summary>
+        /// User Id.
+        /// </summary>
+        public virtual long? UserId { get; set; }
 
         /// <summary>
         /// Device Platform.
@@ -86,6 +97,16 @@ namespace Abp.Push.Devices
         public virtual PushDeviceData Data { get; set; }
 
         /// <summary>
+        /// Expiration time.
+        /// </summary>
+        public virtual DateTime? ExpirationTime { get; set; }
+
+        /// <summary>
+        /// Last Access time.
+        /// </summary>
+        public virtual DateTime? LastAccessTime { get; set; }
+
+        /// <summary>
         /// Type of the JSON serialized <see cref="Data"/>.
         /// It's AssemblyQualifiedName of the type.
         /// </summary>
@@ -98,7 +119,7 @@ namespace Abp.Push.Devices
 
         public override string ToString()
         {
-            return $"platform: { DevicePlatform } , identifier: { DeviceIdentifier } , serviceProvider: { ServiceProvider } , serviceProviderKey: { ServiceProviderKey }";
+            return $"tenantId: { TenantId } , userId: { UserId }, platform: { DevicePlatform } , identifier: { DeviceIdentifier } , serviceProvider: { ServiceProvider } , serviceProviderKey: { ServiceProviderKey }";
         }
     }
 }
