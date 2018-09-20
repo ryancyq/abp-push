@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Abp.Collections;
+using Abp.Push.Devices;
 using Abp.Push.Providers;
 
 namespace Abp.Push.Configurations
@@ -9,10 +10,10 @@ namespace Abp.Push.Configurations
     /// </summary>
     public interface IPushConfiguration
     {
-        ITypeList<PushDefinitionProvider> DefinitionProviders { get; }
+        ITypeList<PushDefinitionProvider> Providers { get; }
 
-        List<PushServiceProviderInfo> ServiceProviders { get; }
+        List<ServiceProviderInfo> ServiceProviders { get; }
 
-        List<PushDevicePlatformInfo> DevicePlatforms { get; }
+        List<DevicePlatformInfo> DevicePlatforms { get; }
     }
 }
