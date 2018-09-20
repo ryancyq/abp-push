@@ -53,7 +53,7 @@ namespace Abp.Push.Providers
             var providerInfo = Configuration.ServiceProviders.FirstOrDefault(p => p.Name == provider);
             if (providerInfo == null)
             {
-                throw new Exception("Unknown push service provider: " + provider);
+                throw new ArgumentException("Unknown push service provider: " + provider);
             }
 
             var providerApi = IocResolver.ResolveAsDisposable<IPushApiClient>(providerInfo.ApiClientType);

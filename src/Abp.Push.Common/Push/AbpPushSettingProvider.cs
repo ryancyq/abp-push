@@ -4,7 +4,7 @@ using Abp.Localization;
 
 namespace Abp.Push
 {
-    public class AbpPushSettingProvider : SettingProvider
+    internal class AbpPushSettingProvider : SettingProvider
     {
         public override IEnumerable<SettingDefinition> GetSettingDefinitions(SettingDefinitionProviderContext context)
         {
@@ -19,7 +19,7 @@ namespace Abp.Push
             };
         }
 
-        private static LocalizableString L(string name)
+        protected virtual LocalizableString L(string name)
         {
             return new LocalizableString(name, AbpPushConsts.LocalizationSourceName);
         }

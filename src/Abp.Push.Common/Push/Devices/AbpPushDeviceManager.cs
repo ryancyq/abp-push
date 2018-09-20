@@ -20,11 +20,11 @@ namespace Abp.Push.Devices
         /// </summary>
         protected AbpPushDeviceManager(
             IPushDeviceStore<TDevice> deviceStore,
-            IPushConfiguration configuration
+            IPushConfiguration pushConfiguration
             )
         {
             DeviceStore = deviceStore;
-            Configuration = configuration;
+            Configuration = pushConfiguration;
 
             LocalizationSourceName = AbpPushConsts.LocalizationSourceName;
         }
