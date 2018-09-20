@@ -1,5 +1,8 @@
-﻿using Abp.Modules;
+﻿using Abp.Dependency;
+using Abp.Modules;
 using Abp.Push.Localization;
+using Abp.Push.Devices;
+using Abp.Push.Requests;
 using Abp.Reflection.Extensions;
 
 namespace Abp.Push
@@ -23,6 +26,14 @@ namespace Abp.Push
         public override void Initialize()
         {
             IocManager.RegisterAssemblyByConvention(typeof(AbpPushCommonModule).GetAssembly());
+        }
+
+        public override void PostInitialize()
+        {
+            IocManager.RegisterIfNot<IPushDeviceStore, NullPushDeviceStore>(DependencyLifeStyle.Singleton);
+            IocManager.RegisterIfNot<IPushRequestStore, NullPushRequestStore>(DependencyLifeStyle.Singleton);
+
+            IocManager.Resolve<PushDefinitionManager>().Initialize();
         }
     }
 }

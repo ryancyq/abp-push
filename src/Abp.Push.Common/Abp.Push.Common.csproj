@@ -1,7 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-
     <TargetFramework>netstandard2.0</TargetFramework>
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
     <AssemblyTitle>Abp Push</AssemblyTitle>
@@ -15,26 +13,20 @@
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
     <GenerateAssemblyCopyrightAttribute>false</GenerateAssemblyCopyrightAttribute>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
-
     <Version>3.8.0</Version>
     <OutputType>Library</OutputType>
     <RepositoryType>git</RepositoryType>
-
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Abp" Version="3.8.2" />
   </ItemGroup>
-
   <ItemGroup>
     <EmbeddedResource Include="Push\Localization\*.xml" Exclude="bin\**;obj\**;**\*.xproj;packages\**;@(EmbeddedResource)" />
   </ItemGroup>
-
   <ItemGroup>
     <None Include="bin\Release\netstandard2.0\Abp.Push.Common.pdb">
       <PackagePath>lib/netstandard2.0/</PackagePath>
       <Pack>true</Pack>
     </None>
   </ItemGroup>
-
 </Project>
