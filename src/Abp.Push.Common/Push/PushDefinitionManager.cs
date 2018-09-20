@@ -6,44 +6,43 @@ using Abp.Authorization;
 using Abp.Collections.Extensions;
 using Abp.Dependency;
 using Abp.Push.Configurations;
-using Abp.Push.Providers;
 
 namespace Abp.Push
 {
     /// <summary>
     /// Implements <see cref="IPushDefinitionManager"/>.
     /// </summary>
-    internal class PushDefinitionManager : IPushDefinitionManager, ISingletonDependency
+    public class PushDefinitionManager : AbpServiceBase, IPushDefinitionManager, ISingletonDependency
     {
-        private readonly IPushConfiguration _configuration;
-        private readonly IocManager _iocManager;
+        protected readonly IPushConfiguration Configuration;
+        protected readonly IIocResolver IocResolver;
 
         private readonly IDictionary<string, PushDefinition> _pushDefinitions;
 
         public PushDefinitionManager(
-            IocManager iocManager,
+            IIocResolver iocResolver,
             IPushConfiguration configuration)
         {
-            _configuration = configuration;
-            _iocManager = iocManager;
+            Configuration = configuration;
+            IocResolver = iocResolver;
 
             _pushDefinitions = new Dictionary<string, PushDefinition>();
         }
 
-        public void Initialize()
+        public virtual void Initialize()
         {
             var context = new PushDefinitionContext(this);
 
-            foreach (var providerType in _configuration.Providers)
+            foreach (var providerType in Configuration.Providers)
             {
-                using (var provider = _iocManager.ResolveAsDisposable<PushDefinitionProvider>(providerType))
+                using (var provider = IocResolver.ResolveAsDisposable<PushDefinitionProvider>(providerType))
                 {
                     provider.Object.SetDefinitions(context);
                 }
             }
         }
 
-        public void Add(PushDefinition pushDefinition)
+        public virtual void Add(PushDefinition pushDefinition)
         {
             if (_pushDefinitions.ContainsKey(pushDefinition.Name))
             {
@@ -53,7 +52,7 @@ namespace Abp.Push
             _pushDefinitions[pushDefinition.Name] = pushDefinition;
         }
 
-        public PushDefinition Get(string name)
+        public virtual PushDefinition Get(string name)
         {
             var definition = GetOrNull(name);
             if (definition == null)
@@ -64,17 +63,17 @@ namespace Abp.Push
             return definition;
         }
 
-        public PushDefinition GetOrNull(string name)
+        public virtual PushDefinition GetOrNull(string name)
         {
             return _pushDefinitions.GetOrDefault(name);
         }
 
-        public IReadOnlyList<PushDefinition> GetAll()
+        public virtual IReadOnlyList<PushDefinition> GetAll()
         {
             return _pushDefinitions.Values.ToImmutableList();
         }
 
-        public async Task<bool> IsAvailableAsync(string name, UserIdentifier user)
+        public virtual async Task<bool> IsAvailableAsync(string name, UserIdentifier user)
         {
             var pushDefinition = GetOrNull(name);
             if (pushDefinition == null)
@@ -84,7 +83,7 @@ namespace Abp.Push
 
             if (pushDefinition.FeatureDependency != null)
             {
-                using (var featureDependencyContext = _iocManager.ResolveAsDisposable<FeatureDependencyContext>())
+                using (var featureDependencyContext = IocResolver.ResolveAsDisposable<FeatureDependencyContext>())
                 {
                     featureDependencyContext.Object.TenantId = user.TenantId;
 
@@ -97,7 +96,7 @@ namespace Abp.Push
 
             if (pushDefinition.PermissionDependency != null)
             {
-                using (var permissionDependencyContext = _iocManager.ResolveAsDisposable<PermissionDependencyContext>())
+                using (var permissionDependencyContext = IocResolver.ResolveAsDisposable<PermissionDependencyContext>())
                 {
                     permissionDependencyContext.Object.User = user;
 
@@ -111,15 +110,15 @@ namespace Abp.Push
             return true;
         }
 
-        public async Task<IReadOnlyList<PushDefinition>> GetAllAvailableAsync(UserIdentifier user)
+        public virtual async Task<IReadOnlyList<PushDefinition>> GetAllAvailableAsync(UserIdentifier user)
         {
             var availableDefinitions = new List<PushDefinition>();
 
-            using (var permissionDependencyContext = _iocManager.ResolveAsDisposable<PermissionDependencyContext>())
+            using (var permissionDependencyContext = IocResolver.ResolveAsDisposable<PermissionDependencyContext>())
             {
                 permissionDependencyContext.Object.User = user;
 
-                using (var featureDependencyContext = _iocManager.ResolveAsDisposable<FeatureDependencyContext>())
+                using (var featureDependencyContext = IocResolver.ResolveAsDisposable<FeatureDependencyContext>())
                 {
                     featureDependencyContext.Object.TenantId = user.TenantId;
 

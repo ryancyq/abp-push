@@ -1,6 +1,6 @@
 ﻿using Abp.Dependency;
 
-namespace Abp.Push.Providers
+namespace Abp.Push
 {
     /// <summary>
     /// This class should be implemented in order to define pushes.
