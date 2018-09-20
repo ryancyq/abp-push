@@ -10,8 +10,7 @@ using Abp.UI;
 
 namespace Abp.Push.Devices
 {
-    public abstract class AbpPushDeviceManager<TDevice> : DomainService
-        where TDevice : PushDevice
+    public abstract class AbpPushDeviceManager<TDevice> : DomainService where TDevice : PushDevice
     {
         protected readonly IPushDeviceStore<TDevice> DeviceStore;
         protected readonly IPushConfiguration Configuration;
@@ -21,11 +20,11 @@ namespace Abp.Push.Devices
         /// </summary>
         protected AbpPushDeviceManager(
             IPushDeviceStore<TDevice> deviceStore,
-            IPushConfiguration pushConfiguration
+            IPushConfiguration configuration
             )
         {
             DeviceStore = deviceStore;
-            Configuration = pushConfiguration;
+            Configuration = configuration;
 
             LocalizationSourceName = AbpPushConsts.LocalizationSourceName;
         }

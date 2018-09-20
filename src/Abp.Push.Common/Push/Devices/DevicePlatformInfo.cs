@@ -1,14 +1,14 @@
 ﻿using System;
 
-namespace Abp.Push.Providers
+namespace Abp.Push.Devices
 {
-    public class PushDevicePlatformInfo
+    public class DevicePlatformInfo
     {
         public string Name { get; set; }
 
         public Type PlatformResolverType { get; set; }
 
-        public PushDevicePlatformInfo(string name, Type platformResolverType)
+        public DevicePlatformInfo(string name, Type platformResolverType)
         {
             Name = name;
             PlatformResolverType = platformResolverType;
