@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Abp.Push.Devices;
 using Abp.Push.Requests;
 
 namespace Abp.Push.Providers
@@ -8,14 +9,19 @@ namespace Abp.Push.Providers
     /// </summary>
     public interface IPushServiceProvider
     {
-        PushServiceProviderInfo ProviderInfo { get; }
+        ServiceProviderInfo ProviderInfo { get; }
 
-        void Initialize(PushServiceProviderInfo providerInfo);
+        void Initialize(ServiceProviderInfo providerInfo);
 
         /// <summary>
         /// This method tries to deliver a single push to specified users.
         /// If a user does not have any registered device, it should ignore him.
         /// </summary>
-        Task PushAsync(IUserIdentifier[] userIdentifiers, PushRequest pushRequestInfo);
+        Task PushAsync(IUserIdentifier[] userIdentifiers, PushRequest pushRequest);
+
+        /// <summary>
+        /// This method tries to deliver a single push to specified devices.
+        /// </summary>
+        Task PushAsync(IDeviceIdentifier[] deviceIdentifiers, PushRequest pushRequest);
     }
 }

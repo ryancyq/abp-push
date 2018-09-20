@@ -1,23 +1,21 @@
 ﻿using System.Threading.Tasks;
 using Abp.Dependency;
+using Abp.Push.Devices;
 using Abp.Push.Requests;
-using Castle.Core.Logging;
 
 namespace Abp.Push.Providers
 {
-    public abstract class PushServiceProviderBase : IPushServiceProvider, ITransientDependency
+    public abstract class PushServiceProviderBase : AbpServiceBase, IPushServiceProvider, ITransientDependency
     {
-        public PushServiceProviderInfo ProviderInfo { get; set; }
+        public ServiceProviderInfo ProviderInfo { get; set; }
 
-        public ILogger Logger { protected get; set; }
-
-        public void Initialize(PushServiceProviderInfo providerInfo)
+        public void Initialize(ServiceProviderInfo providerInfo)
         {
             ProviderInfo = providerInfo;
-
-            Logger = NullLogger.Instance;
         }
 
-        public abstract Task PushAsync(IUserIdentifier[] userIdentifiers, PushRequestInfo pushRequestInfo);
+        public abstract Task PushAsync(IUserIdentifier[] userIdentifiers, PushRequest pushRequest);
+
+        public abstract Task PushAsync(IDeviceIdentifier[] deviceIdentifiers, PushRequest pushRequest);
     }
 }
