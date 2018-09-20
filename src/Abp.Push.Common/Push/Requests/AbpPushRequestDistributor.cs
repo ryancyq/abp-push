@@ -17,11 +17,11 @@ namespace Abp.Push.Requests
     /// </summary>
     public class AbpPushRequestDistributor : AbpServiceBase, IPushRequestDistributer, ITransientDependency
     {
-        private readonly IPushRequestStore _pushRequestStore;
-        private readonly IPushDefinitionManager _pushDefinitionManager;
-        private readonly IPushConfiguration _pushConfiguration;
-        private readonly IIocResolver _iocResolver;
-        private readonly IGuidGenerator _guidGenerator;
+        protected readonly IPushRequestStore RequestStore;
+        protected readonly IPushDefinitionManager DefinitionManager;
+        protected readonly IPushConfiguration Configuration;
+        protected readonly IIocResolver IocResolver;
+        protected readonly IGuidGenerator GuidGenerator;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AbpPushRequestDistributor"/> class.
@@ -33,11 +33,11 @@ namespace Abp.Push.Requests
             IIocResolver iocResolver,
             IGuidGenerator guidGenerator)
         {
-            _pushRequestStore = pushRequestStore;
-            _pushDefinitionManager = pushDefinitionManager;
-            _pushConfiguration = pushConfiguration;
-            _iocResolver = iocResolver;
-            _guidGenerator = guidGenerator;
+            RequestStore = pushRequestStore;
+            DefinitionManager = pushDefinitionManager;
+            Configuration = pushConfiguration;
+            IocResolver = iocResolver;
+            GuidGenerator = guidGenerator;
         }
 
         [UnitOfWork]
@@ -47,7 +47,7 @@ namespace Abp.Push.Requests
             // set tenantId = null, because push request only store in host side
             using (UnitOfWorkManager.Current.SetTenantId(null))
             {
-                pushRequest = await _pushRequestStore.GetRequestOrNullAsync(pushRequestId);
+                pushRequest = await RequestStore.GetRequestOrNullAsync(pushRequestId);
                 if (pushRequest == null)
                 {
                     Logger.WarnFormat("PushRequestDistributionJob can not continue since could not found push request by id: {0} ", pushRequestId);
@@ -55,7 +55,7 @@ namespace Abp.Push.Requests
                 }
             }
 
-            // TODO: chane GetUsers() to GetDevices()
+            // TODO: change GetUsers() to GetDevices()
             var users = await GetUsers(pushRequest);
             if (users.IsNullOrEmpty())
             {
@@ -64,7 +64,7 @@ namespace Abp.Push.Requests
 
             try
             {
-                foreach (var providerInfo in _pushConfiguration.ServiceProviders)
+                foreach (var providerInfo in Configuration.ServiceProviders)
                 {
                     // TODO: allow PushRequest to store target providers
                     using (var provider = CreateProvider(providerInfo.Name))
@@ -73,7 +73,7 @@ namespace Abp.Push.Requests
                     }
                 }
 
-                await _pushRequestStore.DeleteRequestAsync(pushRequest.Id);
+                await RequestStore.DeleteRequestAsync(pushRequest.Id);
             }
             catch (Exception ex)
             {
@@ -98,7 +98,7 @@ namespace Abp.Push.Requests
                     (tenantIds.Length == 1 && tenantIds[0] == PushRequest.AllTenantIds.To<int>()))
                 {
                     //Get all subscribed users of all tenants
-                    subscriptions = await _pushRequestStore.GetSubscriptionsAsync(
+                    subscriptions = await RequestStore.GetSubscriptionsAsync(
                         request.Name,
                         request.EntityTypeName,
                         request.EntityId
@@ -107,7 +107,7 @@ namespace Abp.Push.Requests
                 else
                 {
                     //Get all subscribed users of specified tenant(s)
-                    subscriptions = await _pushRequestStore.GetSubscriptionsAsync(
+                    subscriptions = await RequestStore.GetSubscriptionsAsync(
                         tenantIds,
                         request.Name,
                         request.EntityTypeName,
@@ -125,7 +125,7 @@ namespace Abp.Push.Requests
                     {
                         foreach (var subscription in subscriptionGroup)
                         {
-                            if (!await _pushDefinitionManager.IsAvailableAsync(request.Name, new UserIdentifier(subscription.TenantId, subscription.UserId)) ||
+                            if (!await DefinitionManager.IsAvailableAsync(request.Name, new UserIdentifier(subscription.TenantId, subscription.UserId)) ||
                                 // TODO: exclude system push request from checking user setting
                                 !SettingManager.GetSettingValueForUser<bool>(AbpPushSettingNames.Receive, subscription.TenantId, subscription.UserId))
                             {
@@ -169,7 +169,7 @@ namespace Abp.Push.Requests
             return userIds.ToArray();
         }
 
-        private static int?[] GetTenantIds(PushRequest pushRequestInfo)
+        protected static int?[] GetTenantIds(PushRequest pushRequestInfo)
         {
             if (pushRequestInfo.TenantIds.IsNullOrEmpty())
             {
@@ -183,15 +183,15 @@ namespace Abp.Push.Requests
                 .ToArray();
         }
 
-        public IDisposableDependencyObjectWrapper<IPushServiceProvider> CreateProvider(string provider)
+        public virtual IDisposableDependencyObjectWrapper<IPushServiceProvider> CreateProvider(string provider)
         {
-            var providerInfo = _pushConfiguration.ServiceProviders.FirstOrDefault(s => s.Name == provider);
+            var providerInfo = Configuration.ServiceProviders.FirstOrDefault(s => s.Name == provider);
             if (providerInfo == null)
             {
                 throw new Exception("Unknown push provider: " + provider);
             }
 
-            var pushProvider = _iocResolver.ResolveAsDisposable<IPushServiceProvider>(providerInfo.ProviderType);
+            var pushProvider = IocResolver.ResolveAsDisposable<IPushServiceProvider>(providerInfo.ProviderType);
             pushProvider.Object.Initialize(providerInfo);
             return pushProvider;
         }

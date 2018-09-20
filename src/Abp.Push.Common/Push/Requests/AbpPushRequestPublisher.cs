@@ -5,7 +5,6 @@ using Abp.BackgroundJobs;
 using Abp.Collections.Extensions;
 using Abp.Dependency;
 using Abp.Domain.Entities;
-using Abp.Domain.Repositories;
 using Abp.Domain.Uow;
 using Abp.Extensions;
 using Abp.Json;
@@ -18,7 +17,7 @@ namespace Abp.Push.Requests
     /// </summary>
     public class AbpPushRequestPublisher : AbpServiceBase, IPushRequestPublisher, ITransientDependency
     {
-        public const int MaxUserCountToDirectlyDistributeARequest = 5;
+        public int MaxUserCountToDirectlyDistributeARequest { get; protected set; } = 5;
 
         /// <summary>
         /// Indicates all tenants.
