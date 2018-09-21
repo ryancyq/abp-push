@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 using System.Transactions;
 using Abp.Domain.Services;
 using Abp.Push.Configurations;
+using Abp.Runtime.Session;
 using Abp.UI;
 
 namespace Abp.Push.Devices
 {
     public abstract class AbpPushDeviceManager<TDevice> : DomainService where TDevice : PushDevice
     {
+        public IAbpSession AbpSession { get; set; }
         protected readonly IPushDeviceStore<TDevice> DeviceStore;
         protected readonly IPushConfiguration Configuration;
 
@@ -25,6 +27,8 @@ namespace Abp.Push.Devices
         {
             DeviceStore = deviceStore;
             Configuration = pushConfiguration;
+
+            AbpSession = NullAbpSession.Instance;
 
             LocalizationSourceName = AbpPushConsts.LocalizationSourceName;
         }
@@ -80,7 +84,7 @@ namespace Abp.Push.Devices
         /// <returns>The push device, if it is found</returns>
         public virtual async Task<TDevice> FindAsync(string serviceProvider, string serviceProviderKey)
         {
-            return await DeviceStore.GetDeviceOrNullAsync(serviceProvider, serviceProviderKey);
+            return await DeviceStore.GetDeviceOrNullAsync(AbpSession.TenantId, serviceProvider, serviceProviderKey);
         }
 
         protected virtual TDevice MapToPushDevice(TDevice entity)
@@ -172,7 +176,7 @@ namespace Abp.Push.Devices
             {
                 using (var uow = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
                 {
-                    await DeviceStore.DeleteDevicesByProviderAsync(serviceProvider, serviceProviderKey);
+                    await DeviceStore.DeleteDevicesByProviderAsync(AbpSession.TenantId, serviceProvider, serviceProviderKey);
                     await uow.CompleteAsync();
                 }
             }

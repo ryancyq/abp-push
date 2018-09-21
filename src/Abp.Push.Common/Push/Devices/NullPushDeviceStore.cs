@@ -51,17 +51,17 @@ namespace Abp.Push.Devices
             return Task.FromResult(0);
         }
 
-        public Task DeleteDevicesByProviderAsync(string serviceProvider)
+        public Task DeleteDevicesByProviderAsync(int? tenantId, string serviceProvider)
         {
             return Task.FromResult(0);
         }
 
-        public Task DeleteDevicesByProviderAsync(string serviceProvider, string serviceProviderKey)
+        public Task DeleteDevicesByProviderAsync(int? tenantId, string serviceProvider, string serviceProviderKey)
         {
             return Task.FromResult(0);
         }
 
-        public Task DeleteDevicesByPlatformAsync(string devicePlatform)
+        public Task DeleteDevicesByPlatformAsync(int? tenantId, string devicePlatform)
         {
             return Task.FromResult(0);
         }
@@ -76,7 +76,7 @@ namespace Abp.Push.Devices
             return Task.FromResult(0);
         }
 
-        public Task<TDevice> GetDeviceOrNullAsync(string serviceProvider, string serviceProviderKey)
+        public Task<TDevice> GetDeviceOrNullAsync(int? tenantId, string serviceProvider, string serviceProviderKey)
         {
             return Task.FromResult(null as TDevice);
         }
@@ -86,17 +86,17 @@ namespace Abp.Push.Devices
             return Task.FromResult(null as TDevice);
         }
 
-        public Task<List<TDevice>> GetDevicesAsync(int? skipCount = null, int? maxResultCount = null)
+        public Task<List<TDevice>> GetDevicesAsync(int? tenantId, int? skipCount = null, int? maxResultCount = null)
         {
             return Task.FromResult(new List<TDevice>());
         }
 
-        public Task<List<TDevice>> GetDevicesByProviderAsync(string serviceProvider, int? skipCount = null, int? maxResultCount = null)
+        public Task<List<TDevice>> GetDevicesByProviderAsync(int? tenantId, string serviceProvider, int? skipCount = null, int? maxResultCount = null)
         {
             return Task.FromResult(new List<TDevice>());
         }
 
-        public Task<List<TDevice>> GetDevicesByPlatformAsync(string devicePlatform, int? skipCount = null, int? maxResultCount = null)
+        public Task<List<TDevice>> GetDevicesByPlatformAsync(int? tenantId, string devicePlatform, int? skipCount = null, int? maxResultCount = null)
         {
             return Task.FromResult(new List<TDevice>());
         }

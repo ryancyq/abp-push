@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Abp.Domain.Repositories;
+using Abp.Domain.Uow;
 using Abp.Linq;
 
 namespace Abp.Push.Devices
@@ -25,160 +26,262 @@ namespace Abp.Push.Devices
             DeviceRepository = deviceRepository;
         }
 
-        public async virtual Task DeleteDeviceAsync(TDevice device)
+        [UnitOfWork]
+        public virtual async Task DeleteDeviceAsync(TDevice device)
         {
-            await DeviceRepository.DeleteAsync(device);
+            using (UnitOfWorkManager.Current.SetTenantId(device.TenantId))
+            {
+                await DeviceRepository.DeleteAsync(device);
+                await UnitOfWorkManager.Current.SaveChangesAsync();
+            }
         }
 
-        public async virtual Task DeleteDeviceAsync(IDeviceIdentifier deviceIdentifier)
+        [UnitOfWork]
+        public virtual async Task DeleteDeviceAsync(IDeviceIdentifier deviceIdentifier)
         {
-            await DeviceRepository.DeleteAsync(d => d.TenantId == deviceIdentifier.TenantId && d.Id == deviceIdentifier.DeviceId);
+            using (UnitOfWorkManager.Current.SetTenantId(deviceIdentifier.TenantId))
+            {
+                await DeviceRepository.DeleteAsync(d => d.TenantId == deviceIdentifier.TenantId &&
+                                                   d.Id == deviceIdentifier.DeviceId);
+                await UnitOfWorkManager.Current.SaveChangesAsync();
+            }
         }
 
-        public async virtual Task DeleteDevicesByPlatformAsync(string devicePlatform)
+        [UnitOfWork]
+        public virtual async Task DeleteDevicesByPlatformAsync(int? tenantId, string devicePlatform)
         {
-            await DeviceRepository.DeleteAsync(d => d.DevicePlatform == devicePlatform);
+            using (UnitOfWorkManager.Current.SetTenantId(tenantId))
+            {
+                await DeviceRepository.DeleteAsync(d => d.DevicePlatform == devicePlatform);
+                await UnitOfWorkManager.Current.SaveChangesAsync();
+            }
         }
 
-        public async virtual Task DeleteDevicesByProviderAsync(string serviceProvider)
+        [UnitOfWork]
+        public virtual async Task DeleteDevicesByProviderAsync(int? tenantId, string serviceProvider)
         {
-            await DeviceRepository.DeleteAsync(d => d.ServiceProvider == serviceProvider);
+            using (UnitOfWorkManager.Current.SetTenantId(tenantId))
+            {
+                await DeviceRepository.DeleteAsync(d => d.ServiceProvider == serviceProvider);
+                await UnitOfWorkManager.Current.SaveChangesAsync();
+            }
         }
 
-        public async virtual Task DeleteDevicesByProviderAsync(string serviceProvider, string serviceProviderKey)
+        [UnitOfWork]
+        public virtual async Task DeleteDevicesByProviderAsync(int? tenantId, string serviceProvider, string serviceProviderKey)
         {
-            await DeviceRepository.DeleteAsync(d => d.ServiceProvider == serviceProvider && d.ServiceProviderKey == serviceProviderKey);
+            using (UnitOfWorkManager.Current.SetTenantId(tenantId))
+            {
+                await DeviceRepository.DeleteAsync(d => d.ServiceProvider == serviceProvider &&
+                                                   d.ServiceProviderKey == serviceProviderKey);
+                await UnitOfWorkManager.Current.SaveChangesAsync();
+            }
         }
 
-        public async virtual Task DeleteDevicesByUserAsync(IUserIdentifier userIdentifier)
+        [UnitOfWork]
+        public virtual async Task DeleteDevicesByUserAsync(IUserIdentifier userIdentifier)
         {
-            await DeviceRepository.DeleteAsync(d => d.TenantId == userIdentifier.TenantId && d.UserId == userIdentifier.UserId);
+            using (UnitOfWorkManager.Current.SetTenantId(userIdentifier.TenantId))
+            {
+                await DeviceRepository.DeleteAsync(d => d.UserId == userIdentifier.UserId);
+                await UnitOfWorkManager.Current.SaveChangesAsync();
+            }
         }
 
-        public async virtual Task DeleteDevicesByUserPlatformAsync(IUserIdentifier userIdentifier, string devicePlatform)
+        [UnitOfWork]
+        public virtual async Task DeleteDevicesByUserPlatformAsync(IUserIdentifier userIdentifier, string devicePlatform)
         {
-            await DeviceRepository.DeleteAsync(d => d.TenantId == userIdentifier.TenantId && d.UserId == userIdentifier.UserId &&
-                                               d.DevicePlatform == devicePlatform);
+            using (UnitOfWorkManager.Current.SetTenantId(userIdentifier.TenantId))
+            {
+                await DeviceRepository.DeleteAsync(d => d.UserId == userIdentifier.UserId &&
+                                                   d.DevicePlatform == devicePlatform);
+                await UnitOfWorkManager.Current.SaveChangesAsync();
+            }
         }
 
-        public async virtual Task DeleteDevicesByUserProviderAsync(IUserIdentifier userIdentifier, string serviceProvider)
+        [UnitOfWork]
+        public virtual async Task DeleteDevicesByUserProviderAsync(IUserIdentifier userIdentifier, string serviceProvider)
         {
-            await DeviceRepository.DeleteAsync(d => d.TenantId == userIdentifier.TenantId && d.UserId == userIdentifier.UserId &&
-                                               d.ServiceProvider == serviceProvider);
+            using (UnitOfWorkManager.Current.SetTenantId(userIdentifier.TenantId))
+            {
+                await DeviceRepository.DeleteAsync(d => d.UserId == userIdentifier.UserId &&
+                                                   d.ServiceProvider == serviceProvider);
+                await UnitOfWorkManager.Current.SaveChangesAsync();
+            }
         }
 
-        public async virtual Task<TDevice> GetDeviceOrNullAsync(string serviceProvider, string serviceProviderKey)
+        [UnitOfWork]
+        public virtual async Task<TDevice> GetDeviceOrNullAsync(int? tenantId, string serviceProvider, string serviceProviderKey)
         {
-            return await DeviceRepository
-                .FirstOrDefaultAsync(d => d.ServiceProvider == serviceProvider && d.ServiceProviderKey == serviceProviderKey);
+            using (UnitOfWorkManager.Current.SetTenantId(tenantId))
+            {
+                return await DeviceRepository.FirstOrDefaultAsync(d => d.ServiceProvider == serviceProvider &&
+                                                                  d.ServiceProviderKey == serviceProviderKey);
+            }
         }
 
-        public async virtual Task<TDevice> GetUserDeviceOrNullAsync(IUserIdentifier userIdentifier, string serviceProvider, string serviceProviderKey)
+        [UnitOfWork]
+        public virtual async Task<TDevice> GetUserDeviceOrNullAsync(IUserIdentifier userIdentifier, string serviceProvider, string serviceProviderKey)
         {
-            return await DeviceRepository
-                .FirstOrDefaultAsync(d => d.TenantId == userIdentifier.TenantId && d.UserId == userIdentifier.UserId &&
-                                     d.ServiceProvider == serviceProvider && d.ServiceProviderKey == serviceProviderKey);
+            using (UnitOfWorkManager.Current.SetTenantId(userIdentifier.TenantId))
+            {
+                return await DeviceRepository.FirstOrDefaultAsync(d => d.UserId == userIdentifier.UserId &&
+                                                                  d.ServiceProvider == serviceProvider &&
+                                                                  d.ServiceProviderKey == serviceProviderKey);
+            }
+
         }
 
-        public async virtual Task<List<TDevice>> GetDevicesAsync(int? skipCount = null, int? maxResultCount = null)
+        [UnitOfWork]
+        public virtual async Task<List<TDevice>> GetDevicesAsync(int? tenantId, int? skipCount = null, int? maxResultCount = null)
         {
-            var query = DeviceRepository.GetAll();
-            query = ApplySkipTake(query, skipCount, maxResultCount);
+            using (UnitOfWorkManager.Current.SetTenantId(tenantId))
+            {
+                var query = DeviceRepository.GetAll();
+                query = ApplySkipTake(query, skipCount, maxResultCount);
 
-            return await AsyncQueryableExecuter.ToListAsync(query);
+                return await AsyncQueryableExecuter.ToListAsync(query);
+            }
         }
 
-        public async virtual Task<List<TDevice>> GetDevicesByPlatformAsync(string devicePlatform, int? skipCount = null, int? maxResultCount = null)
+        [UnitOfWork]
+        public virtual async Task<List<TDevice>> GetDevicesByPlatformAsync(int? tenantId, string devicePlatform, int? skipCount = null, int? maxResultCount = null)
         {
-            var query = DeviceRepository.GetAll();
-            query = ApplyPlatform(query, devicePlatform);
-            query = ApplySkipTake(query, skipCount, maxResultCount);
+            using (UnitOfWorkManager.Current.SetTenantId(tenantId))
+            {
+                var query = DeviceRepository.GetAll();
+                query = ApplyPlatform(query, devicePlatform);
+                query = ApplySkipTake(query, skipCount, maxResultCount);
 
-            return await AsyncQueryableExecuter.ToListAsync(query);
+                return await AsyncQueryableExecuter.ToListAsync(query);
+            }
         }
 
-        public async virtual Task<List<TDevice>> GetDevicesByProviderAsync(string serviceProvider, int? skipCount = null, int? maxResultCount = null)
+        [UnitOfWork]
+        public virtual async Task<List<TDevice>> GetDevicesByProviderAsync(int? tenantId, string serviceProvider, int? skipCount = null, int? maxResultCount = null)
         {
-            var query = DeviceRepository.GetAll();
-            query = ApplyProvider(query, serviceProvider);
-            query = ApplySkipTake(query, skipCount, maxResultCount);
+            using (UnitOfWorkManager.Current.SetTenantId(tenantId))
+            {
+                var query = DeviceRepository.GetAll();
+                query = ApplyProvider(query, serviceProvider);
+                query = ApplySkipTake(query, skipCount, maxResultCount);
 
-            return await AsyncQueryableExecuter.ToListAsync(query);
+                return await AsyncQueryableExecuter.ToListAsync(query);
+            }
         }
 
-        public async virtual Task<List<TDevice>> GetDevicesByUserAsync(IUserIdentifier userIdentifier, int? skipCount = null, int? maxResultCount = null)
+        [UnitOfWork]
+        public virtual async Task<List<TDevice>> GetDevicesByUserAsync(IUserIdentifier userIdentifier, int? skipCount = null, int? maxResultCount = null)
         {
-            var query = DeviceRepository.GetAll();
-            query = ApplyUser(query, userIdentifier);
-            query = ApplySkipTake(query, skipCount, maxResultCount);
+            using (UnitOfWorkManager.Current.SetTenantId(userIdentifier.TenantId))
+            {
+                var query = DeviceRepository.GetAll();
+                query = ApplyUser(query, userIdentifier);
+                query = ApplySkipTake(query, skipCount, maxResultCount);
 
-            return await AsyncQueryableExecuter.ToListAsync(query);
+                return await AsyncQueryableExecuter.ToListAsync(query);
+            }
         }
 
-        public async virtual Task<List<TDevice>> GetDevicesByUserPlatformAsync(IUserIdentifier userIdentifier, string devicePlatform, int? skipCount = null, int? maxResultCount = null)
+        [UnitOfWork]
+        public virtual async Task<List<TDevice>> GetDevicesByUserPlatformAsync(IUserIdentifier userIdentifier, string devicePlatform, int? skipCount = null, int? maxResultCount = null)
         {
-            var query = DeviceRepository.GetAll();
-            query = ApplyPlatform(query, devicePlatform);
-            query = ApplyUser(query, userIdentifier);
-            query = ApplySkipTake(query, skipCount, maxResultCount);
+            using (UnitOfWorkManager.Current.SetTenantId(userIdentifier.TenantId))
+            {
+                var query = DeviceRepository.GetAll();
+                query = ApplyPlatform(query, devicePlatform);
+                query = ApplyUser(query, userIdentifier);
+                query = ApplySkipTake(query, skipCount, maxResultCount);
 
-            return await AsyncQueryableExecuter.ToListAsync(query);
+                return await AsyncQueryableExecuter.ToListAsync(query);
+            }
         }
 
-        public async virtual Task<List<TDevice>> GetDevicesByUserProviderAsync(IUserIdentifier userIdentifier, string serviceProvider, int? skipCount = null, int? maxResultCount = null)
+        [UnitOfWork]
+        public virtual async Task<List<TDevice>> GetDevicesByUserProviderAsync(IUserIdentifier userIdentifier, string serviceProvider, int? skipCount = null, int? maxResultCount = null)
         {
-            var query = DeviceRepository.GetAll();
-            query = ApplyProvider(query, serviceProvider);
-            query = ApplyUser(query, userIdentifier);
-            query = ApplySkipTake(query, skipCount, maxResultCount);
+            using (UnitOfWorkManager.Current.SetTenantId(userIdentifier.TenantId))
+            {
+                var query = DeviceRepository.GetAll();
+                query = ApplyProvider(query, serviceProvider);
+                query = ApplyUser(query, userIdentifier);
+                query = ApplySkipTake(query, skipCount, maxResultCount);
 
-            return await AsyncQueryableExecuter.ToListAsync(query);
+                return await AsyncQueryableExecuter.ToListAsync(query);
+            }
         }
 
-        public async virtual Task<int> GetDeviceCountByUserAsync(IUserIdentifier userIdentifier)
+        [UnitOfWork]
+        public virtual async Task<int> GetDeviceCountByUserAsync(IUserIdentifier userIdentifier)
         {
-            var query = DeviceRepository.GetAll();
-            query = ApplyUser(query, userIdentifier);
+            using (UnitOfWorkManager.Current.SetTenantId(userIdentifier.TenantId))
+            {
+                var query = DeviceRepository.GetAll();
+                query = ApplyUser(query, userIdentifier);
 
-            return await AsyncQueryableExecuter.CountAsync(query);
+                return await AsyncQueryableExecuter.CountAsync(query);
+            }
         }
 
-        public async virtual Task<int> GetDeviceCountByUserPlatformAsync(IUserIdentifier userIdentifier, string devicePlatform)
+        [UnitOfWork]
+        public virtual async Task<int> GetDeviceCountByUserPlatformAsync(IUserIdentifier userIdentifier, string devicePlatform)
         {
-            var query = DeviceRepository.GetAll();
-            query = ApplyPlatform(query, devicePlatform);
-            query = ApplyUser(query, userIdentifier);
+            using (UnitOfWorkManager.Current.SetTenantId(userIdentifier.TenantId))
+            {
+                var query = DeviceRepository.GetAll();
+                query = ApplyPlatform(query, devicePlatform);
+                query = ApplyUser(query, userIdentifier);
 
-            return await AsyncQueryableExecuter.CountAsync(query);
+                return await AsyncQueryableExecuter.CountAsync(query);
+            }
         }
 
-        public async virtual Task<int> GetDeviceCountByUserProviderAsync(IUserIdentifier userIdentifier, string serviceProvider)
+        [UnitOfWork]
+        public virtual async Task<int> GetDeviceCountByUserProviderAsync(IUserIdentifier userIdentifier, string serviceProvider)
         {
-            var query = DeviceRepository.GetAll();
-            query = ApplyProvider(query, serviceProvider);
-            query = ApplyUser(query, userIdentifier);
+            using (UnitOfWorkManager.Current.SetTenantId(userIdentifier.TenantId))
+            {
+                var query = DeviceRepository.GetAll();
+                query = ApplyProvider(query, serviceProvider);
+                query = ApplyUser(query, userIdentifier);
 
-            return await AsyncQueryableExecuter.CountAsync(query);
+                return await AsyncQueryableExecuter.CountAsync(query);
+            }
         }
 
-        public async virtual Task InsertDeviceAsync(TDevice device)
+        [UnitOfWork]
+        public virtual async Task InsertDeviceAsync(TDevice device)
         {
-            await DeviceRepository.InsertAsync(device);
+            using (UnitOfWorkManager.Current.SetTenantId(device.TenantId))
+            {
+                await DeviceRepository.InsertAsync(device);
+                await UnitOfWorkManager.Current.SaveChangesAsync();
+            }
         }
 
-        public async virtual Task InsertOrUpdateDeviceAsync(TDevice device)
+        [UnitOfWork]
+        public virtual async Task InsertOrUpdateDeviceAsync(TDevice device)
         {
-            await DeviceRepository.InsertOrUpdateAsync(device);
+            using (UnitOfWorkManager.Current.SetTenantId(device.TenantId))
+            {
+                await DeviceRepository.InsertOrUpdateAsync(device);
+                await UnitOfWorkManager.Current.SaveChangesAsync();
+            }
         }
 
-        public async virtual Task UpdateDeviceAsync(TDevice device)
+        [UnitOfWork]
+        public virtual async Task UpdateDeviceAsync(TDevice device)
         {
-            await DeviceRepository.UpdateAsync(device);
+            using (UnitOfWorkManager.Current.SetTenantId(device.TenantId))
+            {
+                await DeviceRepository.UpdateAsync(device);
+                await UnitOfWorkManager.Current.SaveChangesAsync();
+            }
         }
 
         protected virtual IQueryable<TDevice> ApplyUser(IQueryable<TDevice> query, IUserIdentifier userIdentifier)
         {
-            return query.Where(d => d.TenantId == userIdentifier.TenantId && d.UserId == userIdentifier.UserId);
+            return query.Where(d => d.UserId == userIdentifier.UserId);
         }
 
         protected virtual IQueryable<TDevice> ApplyPlatform(IQueryable<TDevice> query, string devicePlatform)

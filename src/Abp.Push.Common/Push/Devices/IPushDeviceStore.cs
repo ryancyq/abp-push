@@ -42,26 +42,30 @@ namespace Abp.Push.Devices
 
         /// <summary>
         /// Delete all push devices by service provider.
+        /// <param name="tenantId">The tenant id.</param>
         /// <param name="serviceProvider">The service provider.</param>
         /// </summary>
-        Task DeleteDevicesByProviderAsync(string serviceProvider);
+        Task DeleteDevicesByProviderAsync(int? tenantId, string serviceProvider);
 
         /// <summary>
         /// Delete all push devices by service provider and service provider key.
+        /// <param name="tenantId">The tenant id.</param>
         /// <param name="serviceProvider">The service provider.</param>
         /// <param name="serviceProviderKey">The service provider key.</param>
         /// </summary>
-        Task DeleteDevicesByProviderAsync(string serviceProvider, string serviceProviderKey);
+        Task DeleteDevicesByProviderAsync(int? tenantId, string serviceProvider, string serviceProviderKey);
 
         /// <summary>
         /// Delete all push devices by device platform.
+        /// <param name="tenantId">The tenant id.</param>
         /// <param name="devicePlatform">The device platform.</param>
         /// </summary>
-        Task DeleteDevicesByPlatformAsync(string devicePlatform);
+        Task DeleteDevicesByPlatformAsync(int? tenantId, string devicePlatform);
 
         /// <summary>
         /// Delete a push device by user identifier.
         /// </summary>
+        /// <param name="userIdentifier">The user identifier.</param>
         Task DeleteDevicesByUserAsync(IUserIdentifier userIdentifier);
 
         /// <summary>
@@ -81,27 +85,31 @@ namespace Abp.Push.Devices
         /// <summary>
         /// Get a push device by service provider and service provider key.
         /// </summary>
+        /// <param name="tenantId">The tenant id.</param>
         /// <param name="serviceProvider">The service provider.</param>
         /// <param name="serviceProviderKey">The service provider key.</param>
         /// <returns>The push device, if it is found</returns>
-        Task<TDevice> GetDeviceOrNullAsync(string serviceProvider, string serviceProviderKey);
+        Task<TDevice> GetDeviceOrNullAsync(int? tenantId, string serviceProvider, string serviceProviderKey);
 
         /// <summary>
         /// Gets all push devices.
         /// </summary>
-        Task<List<TDevice>> GetDevicesAsync(int? skipCount = null, int? maxResultCount = null);
+        /// <param name="tenantId">The tenant id.</param>
+        Task<List<TDevice>> GetDevicesAsync(int? tenantId, int? skipCount = null, int? maxResultCount = null);
 
         /// <summary>
         /// Gets all push devices by service provider.
+        /// <param name="tenantId">The tenant id.</param>
         /// <param name="serviceProvider">The service provider.</param>
         /// </summary>
-        Task<List<TDevice>> GetDevicesByProviderAsync(string serviceProvider, int? skipCount = null, int? maxResultCount = null);
+        Task<List<TDevice>> GetDevicesByProviderAsync(int? tenantId, string serviceProvider, int? skipCount = null, int? maxResultCount = null);
 
         /// <summary>
         /// Gets all push devices by device platform.
+        /// <param name="tenantId">The tenant id.</param>
         /// <param name="devicePlatform">The device platform.</param>
         /// </summary>
-        Task<List<TDevice>> GetDevicesByPlatformAsync(string devicePlatform, int? skipCount = null, int? maxResultCount = null);
+        Task<List<TDevice>> GetDevicesByPlatformAsync(int? tenantId, string devicePlatform, int? skipCount = null, int? maxResultCount = null);
 
         /// <summary>
         /// Get a push device by user identifier and service provider and service provider key.
