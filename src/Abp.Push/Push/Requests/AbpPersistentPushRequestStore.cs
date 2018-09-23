@@ -30,6 +30,8 @@ namespace Abp.Push.Requests
             AsyncQueryableExecuter = NullAsyncQueryableExecuter.Instance;
         }
 
+        #region Subscriptions
+
         [UnitOfWork]
         public virtual async Task InsertSubscriptionAsync(PushRequestSubscription subscription)
         {
@@ -139,6 +141,8 @@ namespace Abp.Push.Requests
                                                                ) > 0;
             }
         }
+
+        #endregion
 
         [UnitOfWork]
         public virtual async Task DeleteRequestAsync(Guid requestId)

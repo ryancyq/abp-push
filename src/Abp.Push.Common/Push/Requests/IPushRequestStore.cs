@@ -6,6 +6,8 @@ namespace Abp.Push.Requests
 {
     public interface IPushRequestStore
     {
+        #region Subscriptions
+
         /// <summary>
         /// Inserts a push request subscription.
         /// </summary>
@@ -35,6 +37,8 @@ namespace Abp.Push.Requests
         /// Checks if a user subscribed for a push request
         /// </summary>
         Task<bool> IsSubscribedAsync(IUserIdentifier user, string pushRequestName, string entityTypeName, string entityId);
+
+        #endregion
 
         /// <summary>
         /// Inserts a push request.
