@@ -15,6 +15,6 @@ namespace Abp.Push.Devices
         /// <summary>
         /// Id of the device.
         /// </summary>
-        Guid DeviceId { get; }
+        long DeviceId { get; }
     }
 }

@@ -7,7 +7,7 @@ using Abp.Domain.Entities.Auditing;
 namespace Abp.Push.Devices
 {
     [Table("AbpPushDevices")]
-    public class PushDevice : CreationAuditedEntity<Guid>, IHasDeviceInfo<Guid>, IMayHaveTenant
+    public class PushDevice : CreationAuditedEntity<long>, IHasDeviceInfo<Guid>, IMayHaveTenant
     {
         /// <summary>
         /// Maximum length of <see cref="DeviceName"/> property.

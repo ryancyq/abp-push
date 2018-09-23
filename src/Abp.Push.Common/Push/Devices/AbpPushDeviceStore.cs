@@ -15,13 +15,13 @@ namespace Abp.Push.Devices
     {
         public IAsyncQueryableExecuter AsyncQueryableExecuter { get; set; }
 
-        protected readonly IRepository<TDevice, Guid> DeviceRepository;
+        protected readonly IRepository<TDevice, long> DeviceRepository;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AbpPushDeviceStore{TDevice}"/> class.
         /// </summary>
         protected AbpPushDeviceStore(
-            IRepository<TDevice, Guid> deviceRepository)
+            IRepository<TDevice, long> deviceRepository)
         {
             DeviceRepository = deviceRepository;
         }

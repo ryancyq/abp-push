@@ -13,7 +13,7 @@ namespace Abp.Push.Devices
         /// Initializes a new instance of the <see cref="AbpPushDeviceStore"/> class.
         /// </summary>
         public AbpPushDeviceStore(
-            IRepository<PushDevice, Guid> deviceRepository
+            IRepository<PushDevice, long> deviceRepository
         ) : base(
             deviceRepository
         )

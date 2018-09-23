@@ -19,7 +19,7 @@ namespace Abp.Push.Devices
         /// <summary>
         /// Id of the device.
         /// </summary>
-        public Guid DeviceId { get; protected set; }
+        public long DeviceId { get; protected set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DeviceIdentifier"/> class.
@@ -34,7 +34,7 @@ namespace Abp.Push.Devices
         /// </summary>
         /// <param name="tenantId">Tenant Id of the device.</param>
         /// <param name="deviceId">Id of the device.</param>
-        public DeviceIdentifier(int? tenantId, Guid deviceId)
+        public DeviceIdentifier(int? tenantId, long deviceId)
         {
             TenantId = tenantId;
             DeviceId = deviceId;
@@ -59,13 +59,13 @@ namespace Abp.Push.Devices
             var splitted = deviceIdentifierString.Split('@');
             if (splitted.Length == 1)
             {
-                return new DeviceIdentifier(null, splitted[0].To<Guid>());
+                return new DeviceIdentifier(null, splitted[0].To<long>());
 
             }
 
             if (splitted.Length == 2)
             {
-                return new DeviceIdentifier(splitted[1].To<int>(), splitted[0].To<Guid>());
+                return new DeviceIdentifier(splitted[1].To<int>(), splitted[0].To<long>());
             }
 
             throw new ArgumentException("deviceAtTenant is not properly formatted", nameof(deviceIdentifierString));
@@ -120,8 +120,7 @@ namespace Abp.Push.Devices
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            var bigInteDeviceId = new System.Numerics.BigInteger(DeviceId.ToByteArray());
-            return TenantId == null ? (int)bigInteDeviceId : (int)(TenantId.Value ^ bigInteDeviceId);
+            return TenantId == null ? (int)DeviceId : (int)(TenantId.Value ^ DeviceId);
         }
 
         /// <inheritdoc/>
