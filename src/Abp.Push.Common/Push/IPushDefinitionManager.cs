@@ -40,12 +40,12 @@ namespace Abp.Push
         /// </summary>
         /// <param name="name">Definition Name.</param>
         /// <param name="user">User.</param>
-        Task<bool> IsAvailableAsync(string name, UserIdentifier user);
+        Task<bool> IsAvailableAsync(string name, IUserIdentifier user);
 
         /// <summary>
         /// Gets all available push definitions for given user.
         /// </summary>
         /// <param name="user">User.</param>
-        Task<IReadOnlyList<TDefinition>> GetAllAvailableAsync(UserIdentifier user);
+        Task<IReadOnlyList<TDefinition>> GetAllAvailableAsync(IUserIdentifier user);
     }
 }

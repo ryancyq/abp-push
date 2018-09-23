@@ -73,7 +73,7 @@ namespace Abp.Push
             return _pushDefinitions.Values.ToImmutableList();
         }
 
-        public virtual async Task<bool> IsAvailableAsync(string name, UserIdentifier user)
+        public virtual async Task<bool> IsAvailableAsync(string name, IUserIdentifier user)
         {
             var pushDefinition = GetOrNull(name);
             if (pushDefinition == null)
@@ -98,7 +98,7 @@ namespace Abp.Push
             {
                 using (var permissionDependencyContext = IocResolver.ResolveAsDisposable<PermissionDependencyContext>())
                 {
-                    permissionDependencyContext.Object.User = user;
+                    permissionDependencyContext.Object.User = user.ToUserIdentifier();
 
                     if (!await pushDefinition.PermissionDependency.IsSatisfiedAsync(permissionDependencyContext.Object))
                     {
@@ -110,13 +110,13 @@ namespace Abp.Push
             return true;
         }
 
-        public virtual async Task<IReadOnlyList<PushDefinition>> GetAllAvailableAsync(UserIdentifier user)
+        public virtual async Task<IReadOnlyList<PushDefinition>> GetAllAvailableAsync(IUserIdentifier user)
         {
             var availableDefinitions = new List<PushDefinition>();
 
             using (var permissionDependencyContext = IocResolver.ResolveAsDisposable<PermissionDependencyContext>())
             {
-                permissionDependencyContext.Object.User = user;
+                permissionDependencyContext.Object.User = user.ToUserIdentifier();
 
                 using (var featureDependencyContext = IocResolver.ResolveAsDisposable<FeatureDependencyContext>())
                 {
