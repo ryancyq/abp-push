@@ -19,17 +19,17 @@ namespace Abp.Push.Requests
         /// <summary>
         /// Gets subscriptions for a push request.
         /// </summary>
-        Task<List<PushRequestSubscription>> GetSubscriptionsAsync(string pushRequestName, string entityTypeName, string entityId);
+        Task<List<PushRequestSubscription>> GetSubscriptionsAsync(string pushRequestName, string entityTypeName, string entityId, int skipCount = 0, int maxResultCount = int.MaxValue);
 
         /// <summary>
         /// Gets subscriptions for a push request for specified tenant(s).
         /// </summary>
-        Task<List<PushRequestSubscription>> GetSubscriptionsAsync(int?[] tenantIds, string pushRequestName, string entityTypeName, string entityId);
+        Task<List<PushRequestSubscription>> GetSubscriptionsAsync(int?[] tenantIds, string pushRequestName, string entityTypeName, string entityId, int skipCount = 0, int maxResultCount = int.MaxValue);
 
         /// <summary>
         /// Gets subscriptions for a user.
         /// </summary>
-        Task<List<PushRequestSubscription>> GetSubscriptionsAsync(IUserIdentifier user);
+        Task<List<PushRequestSubscription>> GetSubscriptionsAsync(IUserIdentifier user, int skipCount = 0, int maxResultCount = int.MaxValue);
 
         /// <summary>
         /// Checks if a user subscribed for a push request
@@ -51,16 +51,14 @@ namespace Abp.Push.Requests
         /// <summary>
         /// Gets push requests.
         /// </summary>
-        /// <param name="user">User.</param>
         /// <param name="priority">Push request priority</param>
-        Task<List<PushRequest>> GetRequestsAsync(IUserIdentifier user, PushRequestPriority? priority = null);
+        Task<List<PushRequest>> GetRequestsAsync(PushRequestPriority? priority = null, int skipCount = 0, int maxResultCount = int.MaxValue);
 
         /// <summary>
         /// Gets push request count.
         /// </summary>
-        /// <param name="user">User.</param>
         /// <param name="priority">Push request priority</param>
-        Task<int> GethRequestCountAsync(IUserIdentifier user, PushRequestPriority? priority = null);
+        Task<int> GethRequestCountAsync(PushRequestPriority? priority = null);
 
         /// <summary>
         /// Deletes a push request.
@@ -71,11 +69,6 @@ namespace Abp.Push.Requests
         /// <summary>
         /// Updates a push request priority.
         /// </summary>
-        Task UpdateRequestPriorityAsync(int? tenantId, Guid pushRequestId, PushRequestPriority priority);
-
-        /// <summary>
-        /// Updates all push request priorities for a user.
-        /// </summary>
-        Task UpdateAllRequestPrioritiesAsync(IUserIdentifier user, PushRequestPriority priority);
+        Task UpdateRequestPriorityAsync(Guid pushRequestId, PushRequestPriority priority);
     }
 }

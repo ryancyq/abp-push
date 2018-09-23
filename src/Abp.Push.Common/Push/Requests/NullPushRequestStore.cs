@@ -19,17 +19,17 @@ namespace Abp.Push.Requests
             return Task.FromResult(0);
         }
 
-        public Task<List<PushRequestSubscription>> GetSubscriptionsAsync(string pushRequestName, string entityTypeName, string entityId)
+        public Task<List<PushRequestSubscription>> GetSubscriptionsAsync(string pushRequestName, string entityTypeName, string entityId, int skipCount = 0, int maxResultCount = int.MaxValue)
         {
             return Task.FromResult(new List<PushRequestSubscription>());
         }
 
-        public Task<List<PushRequestSubscription>> GetSubscriptionsAsync(int?[] tenantIds, string pushRequestName, string entityTypeName, string entityId)
+        public Task<List<PushRequestSubscription>> GetSubscriptionsAsync(int?[] tenantIds, string pushRequestName, string entityTypeName, string entityId, int skipCount = 0, int maxResultCount = int.MaxValue)
         {
             return Task.FromResult(new List<PushRequestSubscription>());
         }
 
-        public Task<List<PushRequestSubscription>> GetSubscriptionsAsync(IUserIdentifier user)
+        public Task<List<PushRequestSubscription>> GetSubscriptionsAsync(IUserIdentifier user, int skipCount = 0, int maxResultCount = int.MaxValue)
         {
             return Task.FromResult(new List<PushRequestSubscription>());
         }
@@ -54,22 +54,17 @@ namespace Abp.Push.Requests
             return Task.FromResult(null as PushRequest);
         }
 
-        public Task<List<PushRequest>> GetRequestsAsync(IUserIdentifier user, PushRequestPriority? priority = null)
+        public Task<List<PushRequest>> GetRequestsAsync(PushRequestPriority? priority = null, int skipCount = 0, int maxResultCount = int.MaxValue)
         {
-            throw new NotImplementedException();
+            return Task.FromResult(new List<PushRequest>());
         }
 
-        public Task<int> GethRequestCountAsync(IUserIdentifier user, PushRequestPriority? priority = null)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task UpdateAllRequestPrioritiesAsync(IUserIdentifier user, PushRequestPriority priority)
+        public Task<int> GethRequestCountAsync(PushRequestPriority? priority = null)
         {
             return Task.FromResult(0);
         }
 
-        public Task UpdateRequestPriorityAsync(int? tenantId, Guid pushRequestId, PushRequestPriority priority)
+        public Task UpdateRequestPriorityAsync(Guid pushRequestId, PushRequestPriority priority)
         {
             return Task.FromResult(0);
         }
