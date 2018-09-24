@@ -22,7 +22,7 @@ namespace Abp.Push.Requests
         /// It does not subscribe entity related push request.
         /// </summary>
         /// <param name="user">User.</param>
-        Task SubscribeToAllAvailablePushRequetsAsync(UserIdentifier user);
+        Task SubscribeToAllAvailablePushRequestsAsync(IUserIdentifier user);
 
         /// <summary>
         /// Unsubscribes from a push request.

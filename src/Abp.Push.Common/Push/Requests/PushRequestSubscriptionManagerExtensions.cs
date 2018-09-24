@@ -24,9 +24,9 @@ namespace Abp.Push.Requests
         /// </summary>
         /// <param name="pushRequestSubscriptionManager">Push request subscription manager</param>
         /// <param name="user">User.</param>
-        public static void SubscribeToAllAvailablePushRequets(this IPushRequestSubscriptionManager pushRequestSubscriptionManager, UserIdentifier user)
+        public static void SubscribeToAllAvailablePushRequests(this IPushRequestSubscriptionManager pushRequestSubscriptionManager, IUserIdentifier user)
         {
-            AsyncHelper.RunSync(() => pushRequestSubscriptionManager.SubscribeToAllAvailablePushRequetsAsync(user));
+            AsyncHelper.RunSync(() => pushRequestSubscriptionManager.SubscribeToAllAvailablePushRequestsAsync(user));
         }
 
         /// <summary>
