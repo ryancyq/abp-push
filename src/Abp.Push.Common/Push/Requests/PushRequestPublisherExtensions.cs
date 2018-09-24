@@ -1,4 +1,5 @@
-﻿using Abp.Threading;
+﻿using Abp.Domain.Entities;
+using Abp.Threading;
 
 namespace Abp.Push.Requests
 {

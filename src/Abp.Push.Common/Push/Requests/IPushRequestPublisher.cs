@@ -29,7 +29,7 @@ namespace Abp.Push.Requests
         /// Target tenant id(s).
         /// Used to send push request to subscribed users of specific tenant(s).
         /// This should not be set if <see cref="userIds"/> is set.
-        /// <see cref="PushRequestPublisher.AllTenants"/> can be passed to indicate all tenants.
+        /// <see cref="IPushRequestPublisher.AllTenants"/> can be passed to indicate all tenants.
         /// But this can only work in a single database approach (all tenants are stored in host database).
         /// If this is null, then it's automatically set to the current tenant on <see cref="IAbpSession.TenantId"/>. 
         /// </param>
@@ -38,8 +38,8 @@ namespace Abp.Push.Requests
             PushRequestData data = null,
             EntityIdentifier entityIdentifier = null,
             PushRequestPriority priority = PushRequestPriority.Normal,
-            UserIdentifier[] userIds = null,
-            UserIdentifier[] excludedUserIds = null,
+            IUserIdentifier[] userIds = null,
+            IUserIdentifier[] excludedUserIds = null,
             int?[] tenantIds = null);
     }
 }

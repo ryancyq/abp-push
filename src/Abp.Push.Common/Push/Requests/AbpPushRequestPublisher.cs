@@ -64,8 +64,8 @@ namespace Abp.Push.Requests
             PushRequestData data = null,
             EntityIdentifier entityIdentifier = null,
             PushRequestPriority priority = PushRequestPriority.Normal,
-            UserIdentifier[] userIds = null,
-            UserIdentifier[] excludedUserIds = null,
+            IUserIdentifier[] userIds = null,
+            IUserIdentifier[] excludedUserIds = null,
             int?[] tenantIds = null)
         {
             if (pushRequestName.IsNullOrEmpty())
@@ -90,8 +90,8 @@ namespace Abp.Push.Requests
                 EntityTypeAssemblyQualifiedName = entityIdentifier?.Type.AssemblyQualifiedName,
                 EntityId = entityIdentifier?.Id.ToJsonString(),
                 Priority = priority,
-                UserIds = userIds.IsNullOrEmpty() ? null : userIds.Select(uid => uid.ToUserIdentifierString()).JoinAsString(","),
-                ExcludedUserIds = excludedUserIds.IsNullOrEmpty() ? null : excludedUserIds.Select(uid => uid.ToUserIdentifierString()).JoinAsString(","),
+                UserIds = userIds.IsNullOrEmpty() ? null : userIds.Select(uid => uid.ToUserIdentifier().ToUserIdentifierString()).JoinAsString(","),
+                ExcludedUserIds = excludedUserIds.IsNullOrEmpty() ? null : excludedUserIds.Select(uid => uid.ToUserIdentifier().ToUserIdentifierString()).JoinAsString(","),
                 TenantIds = tenantIds.IsNullOrEmpty() ? null : tenantIds.JoinAsString(","),
                 Data = data?.ToJsonString(),
                 DataTypeName = data?.GetType().AssemblyQualifiedName
