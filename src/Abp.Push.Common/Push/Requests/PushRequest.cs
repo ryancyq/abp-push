@@ -1,7 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using Abp.Collections.Extensions;
 using Abp.Domain.Entities.Auditing;
+using Abp.Extensions;
 using Abp.MultiTenancy;
 
 namespace Abp.Push.Requests
@@ -15,12 +18,6 @@ namespace Abp.Push.Requests
     [MultiTenancySide(MultiTenancySides.Host)]
     public class PushRequest : CreationAuditedEntity<Guid>
     {
-        /// <summary>
-        /// Indicates all tenant ids for <see cref="TenantIds"/> property.
-        /// Value: "0".
-        /// </summary>
-        public const string AllTenantIds = "0";
-
         /// <summary>
         /// Maximum length of <see cref="Name"/> property.
         /// Value: 512.
@@ -187,6 +184,39 @@ namespace Abp.Push.Requests
         {
             Id = id;
             Priority = PushRequestPriority.Normal;
+        }
+
+        /// <summary>
+        /// Indicates all tenant ids for <see cref="AllTenantIdsString"/> property.
+        /// Value: "0".
+        /// </summary>
+        public const string AllTenantIdsString = "0";
+
+        /// <summary>
+        /// Indicates all tenants.
+        /// </summary>
+        public static int AllTenantIds = 0;
+
+        public static string ToTenantIds(int?[] tenantIds)
+        {
+            if (tenantIds.IsNullOrEmpty())
+            {
+                return null;
+            }
+            return tenantIds.JoinAsString(",");
+        }
+
+        public static int?[] GetTenantIds(string tenantIdsString)
+        {
+            if (tenantIdsString.IsNullOrWhiteSpace())
+            {
+                return new int?[] { };
+            }
+
+            return tenantIdsString
+                .Split(",")
+                .Select(tenantIdAsStr => tenantIdAsStr == "null" ? (int?)null : (int?)tenantIdAsStr.To<int>())
+                .ToArray();
         }
     }
 }

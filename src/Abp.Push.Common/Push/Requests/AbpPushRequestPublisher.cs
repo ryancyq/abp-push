@@ -21,17 +21,6 @@ namespace Abp.Push.Requests
         public int MaxUserCountToDirectlyDistributeARequest { get; protected set; } = 5;
 
         /// <summary>
-        /// Indicates all tenants.
-        /// </summary>
-        public static int[] AllTenants
-        {
-            get
-            {
-                return new[] { PushRequest.AllTenantIds.To<int>() };
-            }
-        }
-
-        /// <summary>
         /// Reference to ABP session.
         /// </summary>
         public IAbpSession AbpSession { get; set; }
@@ -87,7 +76,7 @@ namespace Abp.Push.Requests
                 tenantIds = new[] { AbpSession.TenantId };
             }
 
-            var pushRequest = new PushRequest(_guidGenerator.Create())
+            var pushRequest = new PushRequest(GuidGenerator.Create())
             {
                 Name = pushRequestName,
                 EntityTypeName = entityIdentifier?.Type.FullName,
@@ -96,14 +85,14 @@ namespace Abp.Push.Requests
                 Priority = priority,
                 UserIds = userIds.IsNullOrEmpty() ? null : userIds.Select(uid => uid.ToUserIdentifier().ToUserIdentifierString()).JoinAsString(","),
                 ExcludedUserIds = excludedUserIds.IsNullOrEmpty() ? null : excludedUserIds.Select(uid => uid.ToUserIdentifier().ToUserIdentifierString()).JoinAsString(","),
-                TenantIds = tenantIds.IsNullOrEmpty() ? null : tenantIds.JoinAsString(","),
+                TenantIds = PushRequest.ToTenantIds(tenantIds),
                 Data = data?.ToJsonString(),
                 DataTypeName = data?.GetType().AssemblyQualifiedName
             };
 
-            await _pushRequestStore.InsertRequestAsync(pushRequest);
+            await RequestStore.InsertRequestAsync(pushRequest);
 
-            await CurrentUnitOfWork.SaveChangesAsync(); //To get Id of the notification
+            await CurrentUnitOfWork.SaveChangesAsync(); //To get Id of the push request
 
             if (userIds != null && userIds.Length <= Configuration.MaxUserCountForForegroundDistribution)
             {

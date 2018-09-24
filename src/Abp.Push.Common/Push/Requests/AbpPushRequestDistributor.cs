@@ -90,12 +90,10 @@ namespace Abp.Push.Requests
             {
                 //Get subscribed users
 
-                var tenantIds = GetTenantIds(request);
-
                 List<PushRequestSubscription> subscriptions;
 
-                if (tenantIds.IsNullOrEmpty() ||
-                    (tenantIds.Length == 1 && tenantIds[0] == PushRequest.AllTenantIds.To<int>()))
+                if (request.TenantIds.IsNullOrWhiteSpace() ||
+                    request.TenantIds.Trim() == PushRequest.AllTenantIdsString)
                 {
                     //Get all subscribed users of all tenants
                     subscriptions = await RequestStore.GetSubscriptionsAsync(
@@ -106,6 +104,8 @@ namespace Abp.Push.Requests
                 }
                 else
                 {
+                    var tenantIds = PushRequest.GetTenantIds(request.TenantIds);
+
                     //Get all subscribed users of specified tenant(s)
                     subscriptions = await RequestStore.GetSubscriptionsAsync(
                         tenantIds,
@@ -167,20 +167,6 @@ namespace Abp.Push.Requests
             }
 
             return userIds.ToArray();
-        }
-
-        protected static int?[] GetTenantIds(PushRequest pushRequestInfo)
-        {
-            if (pushRequestInfo.TenantIds.IsNullOrEmpty())
-            {
-                return null;
-            }
-
-            return pushRequestInfo
-                .TenantIds
-                .Split(",")
-                .Select(tenantIdAsStr => tenantIdAsStr == "null" ? (int?)null : (int?)tenantIdAsStr.To<int>())
-                .ToArray();
         }
 
         public virtual IDisposableDependencyObjectWrapper<IPushServiceProvider> CreateProvider(string provider)
