@@ -14,11 +14,14 @@ namespace Abp.Push.Configurations
 
         public List<DevicePlatformInfo> DevicePlatforms { get; private set; }
 
+        public int MaxUserCountForForegroundDistribution { get; set; }
+
         public PushConfiguration()
         {
             Providers = new TypeList<PushDefinitionProvider>();
             ServiceProviders = new List<ServiceProviderInfo>();
             DevicePlatforms = new List<DevicePlatformInfo>();
+            MaxUserCountForForegroundDistribution = 5;
         }
     }
 }

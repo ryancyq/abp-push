@@ -8,6 +8,7 @@ using Abp.Domain.Entities;
 using Abp.Domain.Uow;
 using Abp.Extensions;
 using Abp.Json;
+using Abp.Push.Configurations;
 using Abp.Runtime.Session;
 
 namespace Abp.Push.Requests
@@ -35,10 +36,11 @@ namespace Abp.Push.Requests
         /// </summary>
         public IAbpSession AbpSession { get; set; }
 
-        private readonly IPushRequestStore _pushRequestStore;
-        private readonly IBackgroundJobManager _backgroundJobManager;
-        private readonly IPushRequestDistributer _pushRequestDistributer;
-        private readonly IGuidGenerator _guidGenerator;
+        protected readonly IPushRequestStore RequestStore;
+        protected readonly IBackgroundJobManager BackgroundJobManager;
+        protected readonly IPushRequestDistributer RequestDistributer;
+        protected readonly IPushConfiguration Configuration;
+        protected readonly IGuidGenerator GuidGenerator;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AbpPushRequestPublisher"/> class.
@@ -47,13 +49,15 @@ namespace Abp.Push.Requests
             IPushRequestStore pushRequestStore,
             IBackgroundJobManager backgroundJobManager,
             IPushRequestDistributer pushRequestDistributer,
+            IPushConfiguration pushConfiguration,
             IGuidGenerator guidGenerator
         )
         {
-            _pushRequestStore = pushRequestStore;
-            _backgroundJobManager = backgroundJobManager;
-            _pushRequestDistributer = pushRequestDistributer;
-            _guidGenerator = guidGenerator;
+            RequestStore = pushRequestStore;
+            BackgroundJobManager = backgroundJobManager;
+            RequestDistributer = pushRequestDistributer;
+            Configuration = pushConfiguration;
+            GuidGenerator = guidGenerator;
 
             AbpSession = NullAbpSession.Instance;
         }
@@ -101,15 +105,15 @@ namespace Abp.Push.Requests
 
             await CurrentUnitOfWork.SaveChangesAsync(); //To get Id of the notification
 
-            if (userIds != null && userIds.Length <= MaxUserCountToDirectlyDistributeARequest)
+            if (userIds != null && userIds.Length <= Configuration.MaxUserCountForForegroundDistribution)
             {
-                //We can directly distribute the notification since there are not much receivers
-                await _pushRequestDistributer.DistributeAsync(pushRequest.Id);
+                //We can directly distribute the push request since there are not much receivers
+                await RequestDistributer.DistributeAsync(pushRequest.Id);
             }
             else
             {
                 //We enqueue a background job since distributing may get a long time
-                await _backgroundJobManager.EnqueueAsync<PushRequestDistributionJob, PushRequestDistributionJobArgs>(
+                await BackgroundJobManager.EnqueueAsync<PushRequestDistributionJob, PushRequestDistributionJobArgs>(
                     new PushRequestDistributionJobArgs(
                         pushRequest.Id
                         )

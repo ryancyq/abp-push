@@ -15,5 +15,7 @@ namespace Abp.Push.Configurations
         List<ServiceProviderInfo> ServiceProviders { get; }
 
         List<DevicePlatformInfo> DevicePlatforms { get; }
+
+        int MaxUserCountForForegroundDistribution { get; }
     }
 }
