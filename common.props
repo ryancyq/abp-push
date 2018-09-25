@@ -1,0 +1,20 @@
+<Project>
+  <PropertyGroup>
+    <Version>3.8.0</Version>
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+    <PackageIconUrl>http://www.aspnetboilerplate.com/images/abp_nupkg.png</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/ryancyq/abp-push</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/ryancyq/abp-push/blob/master/LICENSE</PackageLicenseUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/ryancyq/abp-push</RepositoryUrl>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Release' ">
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="SourceLink.Create.CommandLine" Version="2.8.1" PrivateAssets="All" />
+  </ItemGroup>
+
+</Project>

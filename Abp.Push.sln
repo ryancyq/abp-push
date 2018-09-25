@@ -11,6 +11,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Abp.Push.Common", "src\Abp.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Abp.Push", "src\Abp.Push\Abp.Push.csproj", "{62081BD6-0FAF-4EF1-BCE4-619AC948C7AF}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution-items", "solution-items", "{0A8896A1-EC2E-44D8-BD7E-34D2E46A16CF}"
+	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		appveyor.yml = appveyor.yml
+		build.cake = build.cake
+		build.ps1 = build.ps1
+		common.props = common.props
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
