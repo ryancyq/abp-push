@@ -2,9 +2,9 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
-    <AssemblyTitle>Abp Push</AssemblyTitle>
-    <AssemblyName>Abp.Push</AssemblyName>
-    <PackageId>Abp.Push</PackageId>
+    <AssemblyTitle>Abp Push.Common</AssemblyTitle>
+    <AssemblyName>Abp.Push.Common</AssemblyName>
+    <PackageId>Abp.Push.Common</PackageId>
     <RootNamespace>Abp</RootNamespace>
     <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
     <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
