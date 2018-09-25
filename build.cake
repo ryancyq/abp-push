@@ -20,7 +20,7 @@ var msBuildPathX64 = (vsLatest==null)
 
 var testProjects = new List<Tuple<string, string[]>>
                 {
-                    new Tuple<string, string[]>("Abp.AspNetCore.Tests", new[] { "net461", "netcoreapp2.1" })
+                    new Tuple<string, string[]>("Abp.Push.Tests", new[] { "net461", "netcoreapp2.1" })
                 };
                       
 
