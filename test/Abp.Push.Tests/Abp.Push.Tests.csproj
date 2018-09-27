@@ -17,7 +17,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Abp.Push.Common\Abp.Push.Common.csproj" />
     <ProjectReference Include="..\..\src\Abp.Push\Abp.Push.csproj" />
   </ItemGroup>
 
