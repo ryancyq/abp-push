@@ -15,7 +15,7 @@ namespace Abp.Push.Requests
     /// <summary>
     /// Used to distribute push requests to users.
     /// </summary>
-    public class AbpPushRequestDistributor : AbpServiceBase, IPushRequestDistributer, ITransientDependency
+    public class AbpPushRequestDistributor : AbpServiceBase, IPushRequestDistributor, ITransientDependency
     {
         protected readonly IPushRequestStore RequestStore;
         protected readonly IPushDefinitionManager DefinitionManager;

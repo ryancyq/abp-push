@@ -10,7 +10,7 @@ namespace Abp.Push.Requests
     /// It can be directly used or can be derived.
     /// </summary>
     [Serializable]
-    public abstract class PushRequestData
+    public class PushRequestData
     {
         /// <summary>
         /// Gets push request data type name.
@@ -55,7 +55,7 @@ namespace Abp.Push.Requests
         /// <summary>
         /// Createa a new RequestData object.
         /// </summary>
-        protected PushRequestData()
+        public PushRequestData()
         {
             _properties = new Dictionary<string, object>();
         }

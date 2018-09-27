@@ -9,19 +9,19 @@ namespace Abp.Push.Requests
     /// </summary>
     public class PushRequestDistributionJob : BackgroundJob<PushRequestDistributionJobArgs>, ITransientDependency
     {
-        private readonly IPushRequestDistributer _pushRequestDistributer;
+        private readonly IPushRequestDistributor _pushRequestDistributor;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PushRequestDistributionJob"/> class.
         /// </summary>
-        public PushRequestDistributionJob(IPushRequestDistributer pushRequestDistributer)
+        public PushRequestDistributionJob(IPushRequestDistributor pushRequestDistributer)
         {
-            _pushRequestDistributer = pushRequestDistributer;
+            _pushRequestDistributor = pushRequestDistributer;
         }
 
         public override void Execute(PushRequestDistributionJobArgs args)
         {
-            AsyncHelper.RunSync(() => _pushRequestDistributer.DistributeAsync(args.PushRequestId));
+            AsyncHelper.RunSync(() => _pushRequestDistributor.DistributeAsync(args.PushRequestId));
         }
     }
 }

@@ -27,7 +27,7 @@ namespace Abp.Push.Requests
 
         protected readonly IPushRequestStore RequestStore;
         protected readonly IBackgroundJobManager BackgroundJobManager;
-        protected readonly IPushRequestDistributer RequestDistributer;
+        protected readonly IPushRequestDistributor RequestDistributor;
         protected readonly IPushConfiguration Configuration;
         protected readonly IGuidGenerator GuidGenerator;
 
@@ -37,14 +37,14 @@ namespace Abp.Push.Requests
         public AbpPushRequestPublisher(
             IPushRequestStore pushRequestStore,
             IBackgroundJobManager backgroundJobManager,
-            IPushRequestDistributer pushRequestDistributer,
+            IPushRequestDistributor pushRequestDistributor,
             IPushConfiguration pushConfiguration,
             IGuidGenerator guidGenerator
         )
         {
             RequestStore = pushRequestStore;
             BackgroundJobManager = backgroundJobManager;
-            RequestDistributer = pushRequestDistributer;
+            RequestDistributor = pushRequestDistributor;
             Configuration = pushConfiguration;
             GuidGenerator = guidGenerator;
 
@@ -97,7 +97,7 @@ namespace Abp.Push.Requests
             if (userIds != null && userIds.Length <= Configuration.MaxUserCountForForegroundDistribution)
             {
                 //We can directly distribute the push request since there are not much receivers
-                await RequestDistributer.DistributeAsync(pushRequest.Id);
+                await RequestDistributor.DistributeAsync(pushRequest.Id);
             }
             else
             {

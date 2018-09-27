@@ -6,7 +6,7 @@ namespace Abp.Push.Requests
     /// <summary>
     /// Used to distribute push requests.
     /// </summary>
-    public interface IPushRequestDistributer
+    public interface IPushRequestDistributor
     {
         /// <summary>
         /// Distributes given push request.
