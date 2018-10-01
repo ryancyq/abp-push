@@ -11,7 +11,7 @@ namespace Abp.Tests.Push
     public class PushRequestPublisher_Tests : TestBaseWithLocalIocManager
     {
         private readonly IPushRequestStore _store;
-        private readonly IBackgroundJobManager _backgroundJobManager; 
+        private readonly IBackgroundJobManager _backgroundJobManager;
         private readonly IPushRequestDistributor _distributor;
         private readonly IPushConfiguration _configuration;
         private readonly IGuidGenerator _generator;
@@ -36,7 +36,7 @@ namespace Abp.Tests.Push
         }
 
         [Fact]
-        public async Task Should_Publish_General_Push_Request()
+        public async Task Should_Publish_Push_Request()
         {
             //Arrange
             var pushRequestData = CreatePushRequestData();
