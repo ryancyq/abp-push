@@ -40,7 +40,11 @@ namespace Abp.Tests.Push
             );
             _distributor.UnitOfWorkManager = Substitute.For<IUnitOfWorkManager>();
             _distributor.UnitOfWorkManager.Current.Returns(Substitute.For<IActiveUnitOfWork>());
-            _distributor.SettingManager = Substitute.For<ISettingManager>();
+
+            var _settingManager = Substitute.For<ISettingManager>();
+            _settingManager.GetSettingValueForUserAsync(Arg.Any<string>(), Arg.Any<int?>(), Arg.Any<long>())
+                           .ReturnsForAnyArgs("true");
+            _distributor.SettingManager = _settingManager;
         }
 
         [Fact]
@@ -62,7 +66,10 @@ namespace Abp.Tests.Push
 
         private static PushRequest CreatePushRequest()
         {
-            return new PushRequest();
+            return new PushRequest
+            {
+                UserIds = "1,2,3"
+            };
         }
 
         private static PushRequestSubscription CreatePushRequestSubscription()
