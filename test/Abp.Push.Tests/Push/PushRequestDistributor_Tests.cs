@@ -62,9 +62,7 @@ namespace Abp.Tests.Push
 
         private static PushRequest CreatePushRequest()
         {
-            var pushRequest = new PushRequest();
-            pushRequest.UserIds = "1,2";
-            return pushRequest;
+            return new PushRequest();
         }
 
         private static PushRequestSubscription CreatePushRequestSubscription()
