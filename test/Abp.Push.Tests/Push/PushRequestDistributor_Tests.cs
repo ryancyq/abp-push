@@ -20,7 +20,6 @@ namespace Abp.Tests.Push
         private readonly IPushConfiguration _configuration;
         private readonly IIocResolver _iocResolver;
         private readonly IGuidGenerator _generator;
-        private readonly IPushServiceProvider _serviceProvider;
         private readonly AbpPushRequestDistributor _distributor;
 
         public PushRequestDistributor_Tests()
