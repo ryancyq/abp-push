@@ -112,23 +112,6 @@ namespace Abp.Push.Requests
         }
 
         [UnitOfWork]
-        protected virtual async Task<List<PushRequestSubscription>> GetSubscriptionsAsync(int? tenantId, string pushRequestName, string entityTypeName, string entityId, int skipCount = 0, int maxResultCount = int.MaxValue)
-        {
-            using (UnitOfWorkManager.Current.SetTenantId(tenantId))
-            {
-                var query = SubscriptionRepository.GetAll()
-                                                  .Where(s =>
-                                                         s.PushRequestName == pushRequestName &&
-                                                         s.EntityTypeName == entityTypeName &&
-                                                         s.EntityId == entityId
-                                                        );
-                query = query.PageBy(skipCount, maxResultCount);
-
-                return await AsyncQueryableExecuter.ToListAsync(query);
-            }
-        }
-
-        [UnitOfWork]
         public virtual async Task<bool> IsSubscribedAsync(IUserIdentifier user, string pushRequestName, string entityTypeName, string entityId)
         {
             using (UnitOfWorkManager.Current.SetTenantId(user.TenantId))
@@ -202,12 +185,12 @@ namespace Abp.Push.Requests
         }
 
         [UnitOfWork]
-        public virtual async Task UpdateRequestPriorityAsync(Guid pushRequestId, PushRequestPriority priority)
+        public virtual async Task UpdateRequestPriorityAsync(Guid requestId, PushRequestPriority priority)
         {
             // push request only defined on Host side
             using (UnitOfWorkManager.Current.SetTenantId(null))
             {
-                var pushRequest = await RequestRepository.FirstOrDefaultAsync(pushRequestId);
+                var pushRequest = await RequestRepository.FirstOrDefaultAsync(requestId);
                 if (pushRequest == null)
                 {
                     return;

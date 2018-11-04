@@ -73,6 +73,6 @@ namespace Abp.Push.Requests
         /// <summary>
         /// Updates a push request priority.
         /// </summary>
-        Task UpdateRequestPriorityAsync(Guid pushRequestId, PushRequestPriority priority);
+        Task UpdateRequestPriorityAsync(Guid requestId, PushRequestPriority priority);
     }
 }
