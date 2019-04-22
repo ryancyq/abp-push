@@ -25,6 +25,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution-items", "solution-
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Abp.Push.Tests", "test\Abp.Push.Tests\Abp.Push.Tests.csproj", "{935CBB37-42F7-4100-91BD-425FC2E1A72B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Abp.Push.EntityFrameworkCore", "src\Abp.Push.EntityFrameworkCore\Abp.Push.EntityFrameworkCore.csproj", "{ADBFFA10-DF24-41DA-BC78-25F9F10942F3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,10 @@ Global
 		{935CBB37-42F7-4100-91BD-425FC2E1A72B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{935CBB37-42F7-4100-91BD-425FC2E1A72B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{935CBB37-42F7-4100-91BD-425FC2E1A72B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADBFFA10-DF24-41DA-BC78-25F9F10942F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADBFFA10-DF24-41DA-BC78-25F9F10942F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADBFFA10-DF24-41DA-BC78-25F9F10942F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADBFFA10-DF24-41DA-BC78-25F9F10942F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -51,6 +57,7 @@ Global
 		{B4F6E73F-D573-461C-A4A6-8F838C50859F} = {CDCAEAFD-A61C-4525-98F5-E8F7227FE7B3}
 		{62081BD6-0FAF-4EF1-BCE4-619AC948C7AF} = {CDCAEAFD-A61C-4525-98F5-E8F7227FE7B3}
 		{935CBB37-42F7-4100-91BD-425FC2E1A72B} = {0ACDB552-6577-497F-8DC5-F38941B5D395}
+		{ADBFFA10-DF24-41DA-BC78-25F9F10942F3} = {CDCAEAFD-A61C-4525-98F5-E8F7227FE7B3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B2C237ED-C779-4CDF-96E9-CFD415CF820E}
