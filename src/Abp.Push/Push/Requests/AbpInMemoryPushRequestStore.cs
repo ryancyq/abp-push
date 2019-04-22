@@ -4,9 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Abp.Collections.Extensions;
-using Abp.Domain.Repositories;
-using Abp.Domain.Uow;
-using Abp.Linq;
 using Abp.Linq.Extensions;
 
 namespace Abp.Push.Requests

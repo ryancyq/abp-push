@@ -16,6 +16,12 @@ namespace Abp.Push.Devices
         public const int MaxDeviceNameLength = 512;
 
         /// <summary>
+        /// Maximum length of <see cref="DevicePlatform"/> property.
+        /// Value: 512.
+        /// </summary>
+        public const int MaxDevicePlatformLength = 256;
+
+        /// <summary>
         /// Maximum length of <see cref="DeviceIdentifier"/> property.
         /// Value: 1024 (1 kB).
         /// </summary>
@@ -58,6 +64,7 @@ namespace Abp.Push.Devices
         /// <summary>
         /// Device Platform.
         /// </summary>
+        [MaxLength(MaxDevicePlatformLength)]
         public virtual string DevicePlatform { get; set; }
 
         /// <summary>
