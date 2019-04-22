@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Abp.Dependency;
 using Abp.Domain.Repositories;
 using Abp.Domain.Uow;
 using Abp.Linq;
@@ -9,9 +9,26 @@ using Abp.Linq;
 namespace Abp.Push.Devices
 {
     /// <summary>
+    /// Implements <see cref="IPushDeviceStore"/> using repositories.
+    /// </summary>
+    internal class AbpPersistentPushDeviceStore : AbpPersistentPushDeviceStore<PushDevice>, IPushDeviceStore, ITransientDependency
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AbpPushDeviceStore"/> class.
+        /// </summary>
+        public AbpPersistentPushDeviceStore(
+            IRepository<PushDevice, long> deviceRepository
+        ) : base(
+            deviceRepository
+        )
+        {
+        }
+    }
+
+    /// <summary>
     /// Implements <see cref="IPushDeviceStore{TDevice}"/> using repositories.
     /// </summary>
-    public abstract class AbpPushDeviceStore<TDevice> : AbpServiceBase, IPushDeviceStore<TDevice> where TDevice : PushDevice
+    public abstract class AbpPersistentPushDeviceStore<TDevice> : AbpServiceBase, IPushDeviceStore<TDevice> where TDevice : PushDevice
     {
         public IAsyncQueryableExecuter AsyncQueryableExecuter { get; set; }
 
@@ -20,7 +37,7 @@ namespace Abp.Push.Devices
         /// <summary>
         /// Initializes a new instance of the <see cref="AbpPushDeviceStore{TDevice}"/> class.
         /// </summary>
-        protected AbpPushDeviceStore(
+        protected AbpPersistentPushDeviceStore(
             IRepository<TDevice, long> deviceRepository)
         {
             DeviceRepository = deviceRepository;
