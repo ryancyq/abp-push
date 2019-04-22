@@ -13,12 +13,12 @@
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
     <GenerateAssemblyCopyrightAttribute>false</GenerateAssemblyCopyrightAttribute>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
-    <Version>3.8.0</Version>
+    <Version>3.0.0</Version>
     <OutputType>Library</OutputType>
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Abp" Version="4.0.1" />
+    <PackageReference Include="Abp" Version="3.0.0" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Push\Localization\*.xml" Exclude="bin\**;obj\**;**\*.xproj;packages\**;@(EmbeddedResource)" />
