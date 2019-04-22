@@ -6,10 +6,7 @@
     <title>$title$</title>
     <authors>Ryancyq</authors>
     <owners>Ryancyq</owners>
-	<license type="file">../LICENSE</license>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
-    <language>en-US</language>
-	<projectUrl>https://github.com/ryancyq/abp-push</projectUrl>
 	<description>Abp Push Module</description>
     <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
     <copyright>Copyright 2019</copyright>

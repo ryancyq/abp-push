@@ -1,11 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyTitle>Abp.Push.EntityFrameworkCore</AssemblyTitle>
     <AssemblyName>Abp.Push.EntityFrameworkCore</AssemblyName>
     <PackageId>Abp.Push.EntityFrameworkCore</PackageId>
     <RootNamespace>Abp</RootNamespace>
-	<GenerateDocumentationFile>false</GenerateDocumentationFile>
+  	<GenerateDocumentationFile>false</GenerateDocumentationFile>
     <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
     <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
@@ -13,10 +16,7 @@
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
     <GenerateAssemblyCopyrightAttribute>true</GenerateAssemblyCopyrightAttribute>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
-	<PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <Version>3.0.0</Version>
     <OutputType>Library</OutputType>
-    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>
@@ -24,19 +24,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="2.1.1" />
+    <PackageReference Include="Abp.EntityFrameworkCore" Version="3.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="bin\Release\netstandard2.0\Abp.Push.EntityFrameworkCore.pdb">
       <PackagePath>lib/netstandard2.0/</PackagePath>
       <Pack>true</Pack>
     </None>
-    <None Include="..\..\LICENSE">
-	  <PackagePath></PackagePath>
-      <Pack>true</Pack>
-	</None>
-  </ItemGroup>
-  
-  <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="2.1.1" />
-    <PackageReference Include="Abp.EntityFrameworkCore" Version="3.0.0" />
   </ItemGroup>
 </Project>
