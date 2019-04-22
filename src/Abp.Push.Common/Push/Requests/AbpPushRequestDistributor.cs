@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Abp.Collections.Extensions;
 using Abp.Configuration;
 using Abp.Dependency;
 using Abp.Domain.Uow;
 using Abp.Extensions;
 using Abp.Push.Configurations;
 using Abp.Push.Providers;
-using Castle.Core.Internal;
 
 namespace Abp.Push.Requests
 {
