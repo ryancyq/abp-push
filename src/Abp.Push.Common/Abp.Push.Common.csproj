@@ -1,18 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <GenerateDocumentationFile>false</GenerateDocumentationFile>
     <AssemblyTitle>Abp Push.Common</AssemblyTitle>
     <AssemblyName>Abp.Push.Common</AssemblyName>
     <PackageId>Abp.Push.Common</PackageId>
     <RootNamespace>Abp</RootNamespace>
+	<GenerateDocumentationFile>false</GenerateDocumentationFile>
     <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
     <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
-    <GenerateAssemblyCopyrightAttribute>false</GenerateAssemblyCopyrightAttribute>
+    <GenerateAssemblyCopyrightAttribute>true</GenerateAssemblyCopyrightAttribute>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+	<PackageLicenseFile>LICENSE</PackageLicenseFile>
     <Version>3.0.0</Version>
     <OutputType>Library</OutputType>
     <RepositoryType>git</RepositoryType>
@@ -28,5 +29,9 @@
       <PackagePath>lib/netstandard2.0/</PackagePath>
       <Pack>true</Pack>
     </None>
+	<None Include="..\..\LICENSE">
+	  <PackagePath></PackagePath>
+      <Pack>true</Pack>
+	</None>
   </ItemGroup>
 </Project>

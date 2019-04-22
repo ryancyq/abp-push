@@ -1,16 +1,16 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>Abp.Push.Common</id>
+    <id>Abp.Push.EntityFrameworkCore</id>
     <version>$version$</version>
     <title>$title$</title>
     <authors>Ryancyq</authors>
     <owners>Ryancyq</owners>
 	<license type="file">../LICENSE</license>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
-    <language>en-US</language>
+	<language>en-US</language>
 	<projectUrl>https://github.com/ryancyq/abp-push</projectUrl>
-	<description>Abp Push Common Module</description>
+    <description>Abp Push EntityFrameworkCore Module</description>
     <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
     <copyright>Copyright 2019</copyright>
     <tags>netstandard2.0 asp.net mvc abp aspnetboilerplate </tags>
