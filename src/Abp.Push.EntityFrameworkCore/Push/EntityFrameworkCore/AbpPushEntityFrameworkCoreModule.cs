@@ -3,10 +3,7 @@ using Abp.Reflection.Extensions;
 
 namespace Abp.Push
 {
-    [DependsOn(
-        typeof(AbpKernelModule),
-        typeof(AbpPushCommonModule)
-        )]
+    [DependsOn(typeof(AbpPushModule))]
     public class AbpPushEntityFrameworkCoreModule : AbpModule
     {
         /// <inheritdoc/>

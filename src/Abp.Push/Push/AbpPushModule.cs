@@ -6,10 +6,7 @@ using Abp.Reflection.Extensions;
 
 namespace Abp.Push
 {
-    [DependsOn(
-        typeof(AbpKernelModule),
-        typeof(AbpPushCommonModule)
-        )]
+    [DependsOn(typeof(AbpPushCommonModule))]
     public class AbpPushModule : AbpModule
     {
         /// <inheritdoc/>

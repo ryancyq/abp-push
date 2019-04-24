@@ -1,15 +1,12 @@
 ﻿using Abp.Dependency;
 using Abp.Modules;
 using Abp.Push.Localization;
-using Abp.Push.Devices;
 using Abp.Push.Requests;
 using Abp.Reflection.Extensions;
 
 namespace Abp.Push
 {
-    [DependsOn(
-        typeof(AbpKernelModule)
-        )]
+    [DependsOn(typeof(AbpKernelModule))]
     public class AbpPushCommonModule : AbpModule
     {
         /// <inheritdoc/>
