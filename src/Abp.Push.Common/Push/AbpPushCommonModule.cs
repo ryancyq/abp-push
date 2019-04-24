@@ -30,7 +30,6 @@ namespace Abp.Push
 
         public override void PostInitialize()
         {
-            IocManager.RegisterIfNot<IPushDeviceStore, NullPushDeviceStore>(DependencyLifeStyle.Singleton);
             IocManager.RegisterIfNot<IPushRequestStore, NullPushRequestStore>(DependencyLifeStyle.Singleton);
 
             IocManager.Resolve<PushDefinitionManager>().Initialize();

@@ -6,14 +6,7 @@ namespace Abp.Push.Devices
     /// <summary>
     /// Used to store (persist) push devices.
     /// </summary>
-    public interface IPushDeviceStore : IPushDeviceStore<PushDevice>
-    {
-    }
-
-    /// <summary>
-    /// Used to store (persist) push devices.
-    /// </summary>
-    public interface IPushDeviceStore<TDevice> where TDevice : PushDevice
+    public interface IPushDeviceStore<TDevice> where TDevice : AbpPushDevice
     {
         /// <summary>
         /// Inserts a push device.

@@ -2,7 +2,7 @@
 {
     public static class PushDeviceExtensions
     {
-        public static UserIdentifier ToUserIdentifierOrNull(this PushDevice device)
+        public static UserIdentifier ToUserIdentifierOrNull(this AbpPushDevice device)
         {
             return device.UserId.HasValue ? new UserIdentifier(device.TenantId, device.UserId.Value) : null;
         }
