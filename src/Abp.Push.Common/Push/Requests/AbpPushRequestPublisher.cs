@@ -28,7 +28,7 @@ namespace Abp.Push.Requests
         protected readonly IPushRequestStore RequestStore;
         protected readonly IBackgroundJobManager BackgroundJobManager;
         protected readonly IPushRequestDistributor RequestDistributor;
-        protected readonly IPushConfiguration Configuration;
+        protected readonly IAbpPushConfiguration Configuration;
         protected readonly IGuidGenerator GuidGenerator;
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace Abp.Push.Requests
             IPushRequestStore pushRequestStore,
             IBackgroundJobManager backgroundJobManager,
             IPushRequestDistributor pushRequestDistributor,
-            IPushConfiguration pushConfiguration,
+            IAbpPushConfiguration pushConfiguration,
             IGuidGenerator guidGenerator
         )
         {

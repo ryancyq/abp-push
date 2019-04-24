@@ -19,7 +19,7 @@ namespace Abp.Push.Requests
     {
         protected readonly IPushRequestStore RequestStore;
         protected readonly IPushDefinitionManager DefinitionManager;
-        protected readonly IPushConfiguration Configuration;
+        protected readonly IAbpPushConfiguration Configuration;
         protected readonly IIocResolver IocResolver;
         protected readonly IGuidGenerator GuidGenerator;
 
@@ -29,7 +29,7 @@ namespace Abp.Push.Requests
         public AbpPushRequestDistributor(
             IPushRequestStore pushRequestStore,
             IPushDefinitionManager pushDefinitionManager,
-            IPushConfiguration pushConfiguration,
+            IAbpPushConfiguration pushConfiguration,
             IIocResolver iocResolver,
             IGuidGenerator guidGenerator)
         {

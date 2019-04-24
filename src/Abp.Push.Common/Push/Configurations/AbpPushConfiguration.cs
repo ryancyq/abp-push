@@ -1,13 +1,16 @@
 ﻿using System.Collections.Generic;
 using Abp.Collections;
+using Abp.Configuration.Startup;
 using Abp.Dependency;
 using Abp.Push.Devices;
 using Abp.Push.Providers;
 
 namespace Abp.Push.Configurations
 {
-    internal class PushConfiguration : IPushConfiguration, ISingletonDependency
+    internal class AbpPushConfiguration : IAbpPushConfiguration, ISingletonDependency
     {
+        public IAbpStartupConfiguration AbpConfiguration { get; private set; }
+
         public ITypeList<PushDefinitionProvider> Providers { get; private set; }
 
         public List<ServiceProviderInfo> ServiceProviders { get; private set; }
@@ -16,8 +19,9 @@ namespace Abp.Push.Configurations
 
         public int MaxUserCountForForegroundDistribution { get; set; }
 
-        public PushConfiguration()
+        public AbpPushConfiguration(IAbpStartupConfiguration abpConfiguration)
         {
+            AbpConfiguration = abpConfiguration;
             Providers = new TypeList<PushDefinitionProvider>();
             ServiceProviders = new List<ServiceProviderInfo>();
             DevicePlatforms = new List<DevicePlatformInfo>();

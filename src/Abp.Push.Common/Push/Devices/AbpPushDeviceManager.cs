@@ -11,18 +11,18 @@ using Abp.UI;
 
 namespace Abp.Push.Devices
 {
-    public abstract class AbpPushDeviceManager<TDevice> : DomainService where TDevice : PushDevice
+    public abstract class AbpPushDeviceManager<TDevice> : DomainService where TDevice : AbpPushDevice, new()
     {
         public IAbpSession AbpSession { get; set; }
         protected readonly IPushDeviceStore<TDevice> DeviceStore;
-        protected readonly IPushConfiguration Configuration;
+        protected readonly IAbpPushConfiguration Configuration;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AbpPushDeviceManager{TDevice}"/> class.
         /// </summary>
         protected AbpPushDeviceManager(
             IPushDeviceStore<TDevice> deviceStore,
-            IPushConfiguration pushConfiguration
+            IAbpPushConfiguration pushConfiguration
             )
         {
             DeviceStore = deviceStore;

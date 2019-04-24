@@ -13,7 +13,7 @@ namespace Abp.Tests.Push
         private readonly IPushRequestStore _store;
         private readonly IBackgroundJobManager _backgroundJobManager;
         private readonly IPushRequestDistributor _distributor;
-        private readonly IPushConfiguration _configuration;
+        private readonly IAbpPushConfiguration _configuration;
         private readonly IGuidGenerator _generator;
         private readonly AbpPushRequestPublisher _publisher;
 
@@ -22,7 +22,7 @@ namespace Abp.Tests.Push
             _store = Substitute.For<IPushRequestStore>();
             _backgroundJobManager = Substitute.For<IBackgroundJobManager>();
             _distributor = Substitute.For<IPushRequestDistributor>();
-            _configuration = Substitute.For<IPushConfiguration>();
+            _configuration = Substitute.For<IAbpPushConfiguration>();
             _generator = Substitute.For<IGuidGenerator>();
             _publisher = new AbpPushRequestPublisher(
                 _store,

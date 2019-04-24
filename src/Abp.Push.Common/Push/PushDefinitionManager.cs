@@ -14,14 +14,14 @@ namespace Abp.Push
     /// </summary>
     public class PushDefinitionManager : AbpServiceBase, IPushDefinitionManager, ISingletonDependency
     {
-        protected readonly IPushConfiguration Configuration;
+        protected readonly IAbpPushConfiguration Configuration;
         protected readonly IIocResolver IocResolver;
 
         private readonly IDictionary<string, PushDefinition> _pushDefinitions;
 
         public PushDefinitionManager(
             IIocResolver iocResolver,
-            IPushConfiguration configuration)
+            IAbpPushConfiguration configuration)
         {
             Configuration = configuration;
             IocResolver = iocResolver;

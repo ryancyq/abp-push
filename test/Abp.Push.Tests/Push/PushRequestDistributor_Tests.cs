@@ -17,7 +17,7 @@ namespace Abp.Tests.Push
     {
         private readonly IPushRequestStore _store;
         private readonly IPushDefinitionManager _definitionManager;
-        private readonly IPushConfiguration _configuration;
+        private readonly IAbpPushConfiguration _configuration;
         private readonly IIocResolver _iocResolver;
         private readonly IGuidGenerator _generator;
         private readonly AbpPushRequestDistributor _distributor;
@@ -26,7 +26,7 @@ namespace Abp.Tests.Push
         {
             _store = Substitute.For<IPushRequestStore>();
             _definitionManager = Substitute.For<IPushDefinitionManager>();
-            _configuration = Substitute.For<IPushConfiguration>();
+            _configuration = Substitute.For<IAbpPushConfiguration>();
             _configuration.ServiceProviders.Returns(new List<ServiceProviderInfo>());
             _iocResolver = Substitute.For<IIocResolver>();
             _generator = Substitute.For<IGuidGenerator>();

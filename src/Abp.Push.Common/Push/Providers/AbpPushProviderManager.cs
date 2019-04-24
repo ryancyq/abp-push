@@ -11,11 +11,11 @@ namespace Abp.Push.Providers
     public class AbpPushProviderManager : DomainService, IPushProviderManager, ITransientDependency
     {
         protected readonly IIocResolver IocResolver;
-        protected readonly IPushConfiguration Configuration;
+        protected readonly IAbpPushConfiguration Configuration;
 
         public AbpPushProviderManager(
             IIocResolver iocResolver,
-            IPushConfiguration pushConfiguration
+            IAbpPushConfiguration pushConfiguration
             )
         {
             IocResolver = iocResolver;
