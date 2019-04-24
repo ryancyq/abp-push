@@ -4,7 +4,7 @@ using Abp.Configuration.Startup;
 using Abp.Push.Devices;
 using Abp.Push.Providers;
 
-namespace Abp.Push.Configurations
+namespace Abp.Push.Configuration
 {
     /// <summary>
     /// Used to configure push system.

@@ -8,7 +8,7 @@ using Abp.Domain.Entities;
 using Abp.Domain.Uow;
 using Abp.Extensions;
 using Abp.Json;
-using Abp.Push.Configurations;
+using Abp.Push.Configuration;
 using Abp.Runtime.Session;
 
 namespace Abp.Push.Requests

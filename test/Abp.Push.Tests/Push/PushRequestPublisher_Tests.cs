@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Abp.BackgroundJobs;
 using Abp.Domain.Uow;
-using Abp.Push.Configurations;
+using Abp.Push.Configuration;
 using Abp.Push.Requests;
 using NSubstitute;
 using Xunit;

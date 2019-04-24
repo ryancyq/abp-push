@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Transactions;
 using Abp.Domain.Services;
-using Abp.Push.Configurations;
+using Abp.Push.Configuration;
 using Abp.Runtime.Session;
 using Abp.UI;
 

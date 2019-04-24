@@ -5,7 +5,7 @@ using Abp.Application.Features;
 using Abp.Authorization;
 using Abp.Collections.Extensions;
 using Abp.Dependency;
-using Abp.Push.Configurations;
+using Abp.Push.Configuration;
 
 namespace Abp.Push
 {

@@ -7,7 +7,7 @@ using Abp.Configuration;
 using Abp.Dependency;
 using Abp.Domain.Uow;
 using Abp.Extensions;
-using Abp.Push.Configurations;
+using Abp.Push.Configuration;
 using Abp.Push.Providers;
 
 namespace Abp.Push.Requests

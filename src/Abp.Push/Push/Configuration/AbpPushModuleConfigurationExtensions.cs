@@ -2,7 +2,7 @@
 using Abp.Push.Requests;
 using Abp.Push.Devices;
 
-namespace Abp.Push.Configurations
+namespace Abp.Push.Configuration
 {
     public static class AbpPushModuleConfigurationExtensions
     {

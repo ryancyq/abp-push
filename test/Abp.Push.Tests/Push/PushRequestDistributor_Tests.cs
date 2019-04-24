@@ -5,7 +5,7 @@ using Abp.Configuration;
 using Abp.Dependency;
 using Abp.Domain.Uow;
 using Abp.Push;
-using Abp.Push.Configurations;
+using Abp.Push.Configuration;
 using Abp.Push.Providers;
 using Abp.Push.Requests;
 using NSubstitute;

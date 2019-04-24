@@ -1,6 +1,6 @@
 ﻿using Abp.Configuration.Startup;
 
-namespace Abp.Push.Configurations
+namespace Abp.Push.Configuration
 {
     public static class AbpPushConfigurationExtensions
     {

@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Abp.Dependency;
 using Abp.Domain.Services;
-using Abp.Push.Configurations;
+using Abp.Push.Configuration;
 using Abp.Push.Devices;
 
 namespace Abp.Push.Providers

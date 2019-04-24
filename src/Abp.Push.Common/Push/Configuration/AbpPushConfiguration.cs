@@ -5,7 +5,7 @@ using Abp.Dependency;
 using Abp.Push.Devices;
 using Abp.Push.Providers;
 
-namespace Abp.Push.Configurations
+namespace Abp.Push.Configuration
 {
     internal class AbpPushConfiguration : IAbpPushConfiguration, ISingletonDependency
     {
