@@ -109,11 +109,6 @@ namespace Abp.Push.Devices
         public virtual DateTime? ExpirationTime { get; set; }
 
         /// <summary>
-        /// Last Access time.
-        /// </summary>
-        public virtual DateTime? LastAccessTime { get; set; }
-
-        /// <summary>
         /// Type of the JSON serialized <see cref="Data"/>.
         /// It's AssemblyQualifiedName of the type.
         /// </summary>
