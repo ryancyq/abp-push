@@ -4,9 +4,9 @@ using Abp.Push.Requests;
 
 namespace Abp.Push.EntityFrameworkCore
 {
-    public interface IAbpPushDbContext
+    public interface IAbpPushDbContext<TDevice> where TDevice : AbpPushDevice, new()
     {
-        DbSet<PushDevice> PushDevices { get; set; }
+        DbSet<TDevice> PushDevices { get; set; }
 
         DbSet<PushRequest> PushRequests { get; set; }
 

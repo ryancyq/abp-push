@@ -6,10 +6,11 @@ namespace Abp.Push.EntityFrameworkCore
 {
     public static class AbpPushEntityFrameworkCoreConfigurationExtensions
     {
-        public static void ConfigureAbpPushEntities(this ModelBuilder modelBuilder, string prefix = null, string schemaName = null)
+        public static void ConfigurePushEntities<TDevice>(this ModelBuilder modelBuilder, string prefix = null, string schemaName = null)
+            where TDevice : AbpPushDevice, new()
         {
             prefix = prefix ?? "Abp";
-            modelBuilder.Entity<PushDevice>(device =>
+            modelBuilder.Entity<TDevice>(device =>
             {
                 var tableName = prefix + "PushDevices";
                 if (schemaName == null)
