@@ -1,4 +1,7 @@
-﻿using Abp.Modules;
+﻿using Abp.Configuration.Startup;
+using Abp.Dependency;
+using Abp.Modules;
+using Abp.Push.Requests;
 using Abp.Reflection.Extensions;
 
 namespace Abp.Push
@@ -12,6 +15,7 @@ namespace Abp.Push
         /// <inheritdoc/>
         public override void PreInitialize()
         {
+            Configuration.ReplaceService<IPushRequestStore, AbpInMemoryPushRequestStore>(DependencyLifeStyle.Transient);
         }
 
         /// <inheritdoc/>
