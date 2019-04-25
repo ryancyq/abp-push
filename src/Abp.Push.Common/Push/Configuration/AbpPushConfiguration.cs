@@ -11,6 +11,8 @@ namespace Abp.Push.Configuration
     {
         public IAbpStartupConfiguration AbpConfiguration { get; private set; }
 
+        public IAbpPushStoreConfiguration StoreConfiguration { get; private set; }
+
         public ITypeList<PushDefinitionProvider> Providers { get; private set; }
 
         public List<ServiceProviderInfo> ServiceProviders { get; private set; }
@@ -19,9 +21,13 @@ namespace Abp.Push.Configuration
 
         public int MaxUserCountForForegroundDistribution { get; set; }
 
-        public AbpPushConfiguration(IAbpStartupConfiguration abpConfiguration)
+        public AbpPushConfiguration(
+            IAbpStartupConfiguration abpConfiguration,
+            AbpPushStoreConfiguration pushStoreConfiguration
+            )
         {
             AbpConfiguration = abpConfiguration;
+            StoreConfiguration = pushStoreConfiguration;
             Providers = new TypeList<PushDefinitionProvider>();
             ServiceProviders = new List<ServiceProviderInfo>();
             DevicePlatforms = new List<DevicePlatformInfo>();

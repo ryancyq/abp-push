@@ -17,6 +17,11 @@ namespace Abp.Push.Configuration
         IAbpStartupConfiguration AbpConfiguration { get; }
 
         /// <summary>
+        /// Gets the push store configuration.
+        /// </summary>
+        IAbpPushStoreConfiguration StoreConfiguration { get; }
+
+        /// <summary>
         /// Gets the list of push definition providers.
         /// </summary>
         ITypeList<PushDefinitionProvider> Providers { get; }
