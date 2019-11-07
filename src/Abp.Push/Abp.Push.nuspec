@@ -7,7 +7,7 @@
     <authors>Ryancyq</authors>
     <owners>Ryancyq</owners>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
-	<description>Abp Push Module</description>
+    <description>Abp Push Module</description>
     <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
     <copyright>Copyright 2019</copyright>
     <tags>netstandard2.0 asp.net mvc abp aspnetboilerplate </tags>

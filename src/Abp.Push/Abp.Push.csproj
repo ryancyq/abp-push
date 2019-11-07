@@ -26,11 +26,4 @@
   <ItemGroup>
     <EmbeddedResource Include="Localization\Push\*.xml" Exclude="bin\**;obj\**;**\*.xproj;packages\**;@(EmbeddedResource)" />
   </ItemGroup>
-
-  <ItemGroup>
-    <None Include="bin\Release\netstandard2.0\Abp.Push.pdb">
-      <PackagePath>lib/netstandard2.0/</PackagePath>
-      <Pack>true</Pack>
-    </None>
-  </ItemGroup>
 </Project>

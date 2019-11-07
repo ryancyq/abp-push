@@ -26,13 +26,6 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="2.1.1" />
-    <PackageReference Include="Abp.EntityFrameworkCore" Version="3.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="bin\Release\netstandard2.0\Abp.Push.EntityFrameworkCore.pdb">
-      <PackagePath>lib/netstandard2.0/</PackagePath>
-      <Pack>true</Pack>
-    </None>
+    <PackageReference Include="Abp.EntityFrameworkCore" Version="3.1.0" />
   </ItemGroup>
 </Project>
