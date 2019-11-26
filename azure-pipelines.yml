@@ -38,6 +38,5 @@ steps:
   inputs:
     command: pack
     packagesToPack: '**/*.nuspec'
-    versioningScheme: byEnvVar
-    versionEnvVar: PackageVersion
+    versioningScheme: off
     packDestination: '$(Build.ArtifactStagingDirectory)\nugetpkg'
