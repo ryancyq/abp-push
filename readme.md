@@ -2,6 +2,7 @@
 A push notification system built base on Abp Framework.
 
 [![Build status](https://ci.appveyor.com/api/projects/status/cocf0g794pbg03ag?svg=true)](https://ci.appveyor.com/project/ryancyq/abp-push)
+[![Build Status](https://dev.azure.com/ryancyq/ryancyq/_apis/build/status/ryancyq.abp-push?branchName=master)](https://dev.azure.com/ryancyq/ryancyq/_build/latest?definitionId=1&branchName=master)
 
 ## Nuget Packages
 |Package|Status|
