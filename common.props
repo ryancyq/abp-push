@@ -2,9 +2,9 @@
   <PropertyGroup>
     <Version>3.1.0</Version>
     <NoWarn>$(NoWarn);CS1591</NoWarn>
-    <PackageIconUrl>http://www.aspnetboilerplate.com/images/abp_nupkg.png</PackageIconUrl>
+    <PackageIconUrl></PackageIconUrl>
     <PackageProjectUrl>https://github.com/ryancyq/abp-push</PackageProjectUrl>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/ryancyq/abp-push</RepositoryUrl>
   </PropertyGroup>
