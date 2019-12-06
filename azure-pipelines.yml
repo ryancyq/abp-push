@@ -34,9 +34,10 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- task: NuGetCommand@2
+- task: DotNetCoreCLI@2
   inputs:
-    command: pack
-    packagesToPack: '**/*.nuspec'
-    versioningScheme: off
-    packDestination: '$(Build.ArtifactStagingDirectory)\nugetpkg'
+    command: 'pack'
+    arguments: '--configuration $(buildConfiguration)'
+    packagesToPack: 'src/*.csproj'
+    nobuild: true
+    versioningScheme: 'off'
