@@ -38,6 +38,6 @@ steps:
   inputs:
     command: 'pack'
     arguments: '--configuration $(buildConfiguration)'
-    packagesToPack: 'src/*.csproj'
+    packagesToPack: 'src/**/*.csproj'
     nobuild: true
     versioningScheme: 'off'
