@@ -20,7 +20,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Abp" Version="3.1.0" />
+    <PackageReference Include="Abp" Version="4.20.0" />
   </ItemGroup>
 
   <ItemGroup>
