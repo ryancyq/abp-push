@@ -42,7 +42,7 @@ namespace Abp.Tests.Push
 
             var _settingManager = Substitute.For<ISettingManager>();
             _settingManager.GetSettingValueForUser(Arg.Any<string>(), Arg.Any<int?>(), Arg.Any<long>())
-                           .ReturnsForAnyArgs("true");
+                           .Returns("true");
             _distributor.SettingManager = _settingManager;
         }
 
