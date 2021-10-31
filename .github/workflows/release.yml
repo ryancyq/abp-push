@@ -28,3 +28,12 @@ jobs:
       run: dotnet build --configuration Release /p:Version=${VERSION}
     - name: Test
       run: dotnet test --configuration Release /p:Version=${VERSION} --no-build
+    - name: Pack
+      run: dotnet pack --configuration Release /p:Version=${VERSION} --no-build --output .
+    - name: Push
+      run: |
+        dotnet nuget push src/Abp.Push.Common/Abp.Push.Common.nupkg --source https://nuget.pkg.github.com/acraven/index.json --api-key ${GITHUB_TOKEN}
+        dotnet nuget push src/Abp.Push/Abp.Push.nupkg --source https://nuget.pkg.github.com/acraven/index.json --api-key ${GITHUB_TOKEN}
+        dotnet nuget push src/Abp.Push.EntityFrameworkCore/Abp.Push.EntityFrameworkCore.nupkg --source https://nuget.pkg.github.com/acraven/index.json --api-key ${GITHUB_TOKEN}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
