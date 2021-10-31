@@ -28,3 +28,9 @@ jobs:
       run: dotnet build --configuration Release /p:Version=${VERSION}
     - name: Test
       run: dotnet test --configuration Release /p:Version=${VERSION} --no-build
+    - name: Pack
+      run: dotnet pack --configuration Release /p:Version=${VERSION} --no-build --output .
+    - name: Push
+      run: dotnet nuget push Abp.Push.${VERSION}.nupkg --source https://nuget.pkg.github.com/acraven/index.json --api-key ${GITHUB_TOKEN}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
